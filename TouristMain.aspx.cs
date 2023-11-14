@@ -10,7 +10,13 @@ public partial class TouristMain : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         EspacioEntites context = new EspacioEntites();
-        Repeater1.DataSource = context.UBICACION.ToList();
-        Repeater1.DataBind();
+
+        var cantidadElementos = context.UBICACION.ToList().Count < 4 ? context.UBICACION.ToList().Count : 4;
+        RepeaterSitiosTuristicos.DataSource = context.UBICACION.ToList().GetRange(0, cantidadElementos);
+        RepeaterSitiosTuristicos.DataBind();
+
+        cantidadElementos = context.ZONA_GEOGRAFICA.ToList().Count < 4 ? context.ZONA_GEOGRAFICA.ToList().Count : 4;
+        RepeaterZonas.DataSource = context.ZONA_GEOGRAFICA.ToList().GetRange(0, 4);
+        RepeaterZonas.DataBind();
     }
 }

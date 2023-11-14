@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 
 public partial class _Default : System.Web.UI.Page
 {
+    private EspacioEntites context = new EspacioEntites();
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -24,8 +25,10 @@ public partial class _Default : System.Web.UI.Page
 
         if (Autenticar(usuario, contrasena))
         {
+            var userDB = context.USUARIO.FirstOrDefault(user=>user.EMAIL == usuario);
+            var destinationPage = context.TIPO_USUARIO.FirstOrDefault(tipo => tipo.ID == userDB.ID_TIPO_USUARIO).ACCESS_PAGE;
             // Autenticación exitosa, redirige a la página de destino.
-            Response.Redirect("~/TouristMain.aspx");
+            Response.Redirect(destinationPage);
         }
         else
         {
@@ -36,15 +39,14 @@ public partial class _Default : System.Web.UI.Page
 
     private bool Autenticar(string usuario, string contrasena)
     {
-        EspacioEntites context = new EspacioEntites();
         var usuarioDB = context.USUARIO.FirstOrDefault(user => user.EMAIL == usuario);
         if (usuarioDB == null)
             return false;
         if (usuarioDB.PASSWORD == Encriptado(contrasena))
             return true;
         return false;
-
     }
+
     private string Encriptado(string contrasena)
     {
         using (SHA256 sha256 = SHA256.Create())
@@ -57,7 +59,6 @@ public partial class _Default : System.Web.UI.Page
             {
                 stringBuilder.Append(hashBytes[i].ToString("x2")); // Convierte el byte en formato hexadecimal
             }
-
             return stringBuilder.ToString();
         }
     }

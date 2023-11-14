@@ -11,34 +11,32 @@
                         <h2>Formulario de Cotización</h2>
                     </div>
                     <div class="col-md-12 mt-4">
-                        <form>
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="mb-3">
-                                        <label for="fecha-llegada" class="form-label">Fecha de Llegada</label>
-                                        <input type="date" class="form-control" id="fecha-llegada" required>
-                                    </div>
-                                </div>
-                                <div class="col-5">
-                                    <div class="mb-3">
-                                        <label for="fecha-salida" class="form-label">Fecha de Salida</label>
-                                        <input type="date" class="form-control" id="fecha-salida" required>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="cantidad-huespedes" class="form-label">N° Huéspedes</label>
-                                        <input type="number" class="form-control" id="cantidad-huespedes" required>
-                                    </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="mb-3">
+                                    <label for="fecha-llegada" class="form-label">Fecha de Llegada</label>
+                                    <input type="date" class="form-control" id="fecha-llegada" required>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="solicitudes-especiales" class="form-label">
-                                    Solicitudes Especiales o
+                            <div class="col-5">
+                                <div class="mb-3">
+                                    <label for="fecha-salida" class="form-label">Fecha de Salida</label>
+                                    <input type="date" class="form-control" id="fecha-salida" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="cantidad-huespedes" class="form-label">N° Huéspedes</label>
+                                    <input type="number" class="form-control" id="cantidad-huespedes" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="solicitudes-especiales" class="form-label">
+                                Solicitudes Especiales o
                                     Comentarios</label>
-                                <textarea class="form-control" id="solicitudes-especiales" rows="3"></textarea>
-                            </div>
-                        </form>
+                            <textarea class="form-control" id="solicitudes-especiales" rows="3"></textarea>
+                        </div>
                     </div>
                 </div>
 

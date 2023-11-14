@@ -28,10 +28,10 @@ public partial class EspacioEntites : DbContext
     public virtual DbSet<IMAGENES> IMAGENES { get; set; }
     public virtual DbSet<RESEÑA> RESEÑA { get; set; }
     public virtual DbSet<RESERVA> RESERVA { get; set; }
-    public virtual DbSet<ROL> ROL { get; set; }
     public virtual DbSet<TIPO_USUARIO> TIPO_USUARIO { get; set; }
     public virtual DbSet<UBICACION> UBICACION { get; set; }
     public virtual DbSet<USUARIO> USUARIO { get; set; }
     public virtual DbSet<ZONA_GEOGRAFICA> ZONA_GEOGRAFICA { get; set; }
     public virtual DbSet<REGION> REGION { get; set; }
+    public virtual DbSet<ACTIVIDADES> ACTIVIDADES { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="TouristUbication.aspx.cs" Inherits="TouristUbication" %>
+﻿<%@ Page Title="Ubicación" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="TouristUbication.aspx.cs" Inherits="TouristUbication" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
 
@@ -7,20 +7,17 @@
         <div class="row no-gutters">
             <!-- Mitad izquierda: Foto grande -->
             <div class="col-md-6">
-                <img src="./assets/img/CapillaMarmol.webp" class="img-fluid" alt="Catedrales de Mármol">
+                <img src="~/Content/img/UbicacionSinImagen.png" class="img-fluid" alt="Catedrales de Mármol" runat="server" id="MainImage">
             </div>
 
             <!-- Mitad derecha: Título y Descripción -->
             <div class="col-md-6">
                 <div class="d-flex align-items-center h-100">
                     <div class="p-5">
-                        <h1 class="display-4">Catedrales de Mármol</h1>
-                        <p class="lead">
-                            Descubre la majestuosidad de las Catedrales de Mármol en la costa de Chile.
-                            Estas formaciones naturales en el lago General Carrera son conocidas por sus impresionantes
-                            cuevas de mármol y sus aguas cristalinas.
+                        <h1 class="display-4" runat="server" id="TitlePage">Catedrales de Mármol</h1>
+                        <p class="lead" runat="server" id="LongDescription">
                         </p>
-                        <a href="#actividadesCollapse">
+                        <a href="#alojamientos">
                             <button type="button" class="btn btn-warning">
                                 Alojamientos
                                 Cercanos</button></a>
@@ -34,67 +31,31 @@
         <div class="row mt-4">
             <div class="col-md-8 offset-md-2">
                 <div id="actividadesCollapse">
-                    <!-- Actividad 1 -->
-                    <div class="accordion" id="accordion1">
-                        <div class="card mb-2">
-                            <div class="card-header" id="heading1">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                        Paseo en bote por las cuevas
-                                    </button>
-                                </h5>
-                            </div>
+                    <asp:Repeater ID="RepeaterActividades" runat="server">
+                        <ItemTemplate>
+                            <div class="accordion" id='<%# "accordion" + Container.ItemIndex %>'>
+                                <div class="card mb-2">
+                                    <div class="card-header" id='<%# "heading" + Container.ItemIndex %>'>
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" type="button" data-bs-toggle="collapse"
+                                                data-bs-target='<%# "#collapse" + Container.ItemIndex %>' aria-expanded="true"
+                                                aria-controls='<%# "collapse" + Container.ItemIndex %>'>
+                                                <%# Eval("DESCRIPCION_CORTA") %>
+                                            </button>
+                                        </h5>
+                                    </div>
 
-                            <div id="collapse1" class="collapse show" aria-labelledby="heading1"
-                                data-bs-parent="#accordion1">
-                                <div class="card-body">
-                                    Descripción detallada del paseo en bote por las cuevas.
+                                    <div id='<%# "collapse" + Container.ItemIndex %>' class="collapse"
+                                        aria-labelledby='<%# "heading" + Container.ItemIndex %>' data-bs-parent='<%# "#accordion" + Container.ItemIndex %>'>
+                                        <div class="card-body">
+                                            <%# Eval("DESCRIPCION_LARGA") %>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
 
-                    <!-- Actividad 2 -->
-                    <div class="accordion" id="accordion2">
-                        <div class="card mb-2">
-                            <div class="card-header" id="heading2">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                        Observación de aves
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapse2" class="collapse" aria-labelledby="heading2"
-                                data-bs-parent="#accordion2">
-                                <div class="card-body">
-                                    Descripción detallada de la observación de aves.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Actividad 3 -->
-                    <div class="accordion" id="accordion3">
-                        <div class="card">
-                            <div class="card-header" id="heading3">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                        Senderismo en los alrededores
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapse3" class="collapse" aria-labelledby="heading3"
-                                data-bs-parent="#accordion3">
-                                <div class="card-body">
-                                    Descripción detallada del senderismo en los alrededores.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Agrega más elementos según sea necesario -->
                 </div>
             </div>
         </div>

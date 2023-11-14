@@ -10,6 +10,16 @@
 using System;
 using System.Collections.Generic;
 
+public partial class ACTIVIDADES
+{
+    public int ID { get; set; }
+    public string DESCRIPCION_CORTA { get; set; }
+    public string DESCRIPCION_LARGA { get; set; }
+    public Nullable<int> ID_UBICACION { get; set; }
+
+    public virtual UBICACION UBICACION { get; set; }
+}
+
 public partial class ALOJAMIENTO
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -17,6 +27,7 @@ public partial class ALOJAMIENTO
     {
         this.RESEÑA = new HashSet<RESEÑA>();
         this.RESERVA = new HashSet<RESERVA>();
+        this.IMAGENES = new HashSet<IMAGENES>();
     }
 
     public int ID { get; set; }
@@ -33,6 +44,8 @@ public partial class ALOJAMIENTO
     public virtual ICollection<RESEÑA> RESEÑA { get; set; }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<RESERVA> RESERVA { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<IMAGENES> IMAGENES { get; set; }
 }
 
 public partial class COMUNA
@@ -63,10 +76,25 @@ public partial class COMUNA
 
 public partial class IMAGENES
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public IMAGENES()
+    {
+        this.ALOJAMIENTO = new HashSet<ALOJAMIENTO>();
+        this.UBICACION1 = new HashSet<UBICACION>();
+        this.ZONA_GEOGRAFICA = new HashSet<ZONA_GEOGRAFICA>();
+    }
+
     public int ID { get; set; }
     public string NOMBRE { get; set; }
     public string TIPO_IMAGEN { get; set; }
     public string UBICACION { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<ALOJAMIENTO> ALOJAMIENTO { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<UBICACION> UBICACION1 { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<ZONA_GEOGRAFICA> ZONA_GEOGRAFICA { get; set; }
 }
 
 public partial class REGION
@@ -112,21 +140,6 @@ public partial class RESERVA
     public virtual USUARIO USUARIO { get; set; }
 }
 
-public partial class ROL
-{
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public ROL()
-    {
-        this.TIPO_USUARIO = new HashSet<TIPO_USUARIO>();
-    }
-
-    public int ID { get; set; }
-    public string NOMBRE { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<TIPO_USUARIO> TIPO_USUARIO { get; set; }
-}
-
 public partial class TIPO_USUARIO
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -137,16 +150,21 @@ public partial class TIPO_USUARIO
 
     public int ID { get; set; }
     public string NOMBRE { get; set; }
-    public Nullable<int> ID_ROL { get; set; }
-    public Nullable<int> TELEFONO { get; set; }
+    public string ACCESS_PAGE { get; set; }
 
-    public virtual ROL ROL { get; set; }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<USUARIO> USUARIO { get; set; }
 }
 
 public partial class UBICACION
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public UBICACION()
+    {
+        this.IMAGENES = new HashSet<IMAGENES>();
+        this.ACTIVIDADES = new HashSet<ACTIVIDADES>();
+    }
+
     public int ID { get; set; }
     public string NOMBRE { get; set; }
     public string DESCRIPCION_CORTA { get; set; }
@@ -156,6 +174,10 @@ public partial class UBICACION
 
     public virtual COMUNA COMUNA { get; set; }
     public virtual ZONA_GEOGRAFICA ZONA_GEOGRAFICA { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<IMAGENES> IMAGENES { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<ACTIVIDADES> ACTIVIDADES { get; set; }
 }
 
 public partial class USUARIO
@@ -194,6 +216,7 @@ public partial class ZONA_GEOGRAFICA
     public ZONA_GEOGRAFICA()
     {
         this.UBICACION = new HashSet<UBICACION>();
+        this.IMAGENES = new HashSet<IMAGENES>();
     }
 
     public int ID { get; set; }
@@ -205,4 +228,6 @@ public partial class ZONA_GEOGRAFICA
     public virtual COMUNA COMUNA { get; set; }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<UBICACION> UBICACION { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<IMAGENES> IMAGENES { get; set; }
 }

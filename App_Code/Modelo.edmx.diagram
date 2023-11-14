@@ -4,17 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b6edfbeec3834cb38d510a1c8e255c79" Name="Diagram1">
-        <EntityTypeShape EntityType="ct_espacio_prodModel.ALOJAMIENTO" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ct_espacio_prodModel.COMUNA" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ct_espacio_prodModel.IMAGENES" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ct_espacio_prodModel.RESEÑA" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ct_espacio_prodModel.RESERVA" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ct_espacio_prodModel.ROL" Width="1.5" PointX="1.5" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ct_espacio_prodModel.TIPO_USUARIO" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ct_espacio_prodModel.UBICACION" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ct_espacio_prodModel.USUARIO" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ct_espacio_prodModel.ZONA_GEOGRAFICA" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
+      <Diagram DiagramId="b6edfbeec3834cb38d510a1c8e255c79" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="ct_espacio_prodModel.ALOJAMIENTO" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ct_espacio_prodModel.COMUNA" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ct_espacio_prodModel.IMAGENES" Width="1.5" PointX="7.625" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ct_espacio_prodModel.RESEÑA" Width="1.5" PointX="7.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ct_espacio_prodModel.RESERVA" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ct_espacio_prodModel.TIPO_USUARIO" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ct_espacio_prodModel.UBICACION" Width="1.5" PointX="9.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ct_espacio_prodModel.USUARIO" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ct_espacio_prodModel.ZONA_GEOGRAFICA" Width="1.5" PointX="12.75" PointY="9.375" IsExpanded="true" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__ALOJAMIEN__ID_CO__46E78A0C" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__RESEÑA__ID_ALOJA__5629CD9C" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__RESERVA__ID_ALOJ__59063A47" ManuallyRouted="false" />
@@ -23,11 +22,15 @@
         <AssociationConnector Association="ct_espacio_prodModel.FK__ZONA_GEOG__ID_CO__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__RESEÑA__ID_USUAR__5535A963" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__RESERVA__ID_USUA__59FA5E80" ManuallyRouted="false" />
-        <AssociationConnector Association="ct_espacio_prodModel.FK__TIPO_USUA__ID_RO__4E88ABD4" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__USUARIO__ID_TIPO__52593CB8" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__UBICACION__ID_ZO__412EB0B6" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ct_espacio_prodModel.REGION" Width="1.5" PointX="0.75" PointY="6.875" />
+        <EntityTypeShape EntityType="ct_espacio_prodModel.REGION" Width="1.5" PointX="0.75" PointY="9.875" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__COMUNA__ID_REGIO__5DCAEF64" />
+        <AssociationConnector Association="ct_espacio_prodModel.IMAGENES_DE_ALOJAMIENTO" />
+        <AssociationConnector Association="ct_espacio_prodModel.IMAGENES_DE_UBICACIONES" />
+        <AssociationConnector Association="ct_espacio_prodModel.IMAGENES_DE_ZONA" />
+        <EntityTypeShape EntityType="ct_espacio_prodModel.ACTIVIDADES" Width="1.5" PointX="12" PointY="12.75" />
+        <AssociationConnector Association="ct_espacio_prodModel.FK__ACTIVIDAD__ID_UB__656C112C" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
