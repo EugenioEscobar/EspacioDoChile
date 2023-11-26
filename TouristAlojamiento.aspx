@@ -42,15 +42,27 @@
 
             <!-- Información del alojamiento (mitad derecha) -->
             <div class="col-md-6">
-                <p><strong>Tipo de Alojamiento:</strong> Casa de vacaciones</p>
-                <p><strong>Capacidad:</strong> 6 personas</p>
-                <p><strong>Dormitorios:</strong> 3</p>
-                <p><strong>Baños:</strong> 2</p>
-                <p><strong>Servicios:</strong> WiFi, TV, Cocina, Estacionamiento</p>
-                <p><strong>Precio por Noche:</strong> $25.000</p>
-                <a href="./Cotizador.html">
-                    <button class="btn btn-primary">COTIZAR</button></a>
+                <p>
+                    <strong>Capacidad:</strong>
+                    <asp:Label ID="lblCapacidad" runat="server" Text="6 personas"></asp:Label>
                 </p>
+                <p>
+                    <strong>Dormitorios:</strong>
+                    <asp:Label ID="lblDormitorios" runat="server" Text="3"></asp:Label>
+                </p>
+                <p>
+                    <strong>Baños:</strong>
+                    <asp:Label ID="lblBanios" runat="server" Text="2"></asp:Label>
+                </p>
+                <p>
+                    <strong>Servicios:</strong>
+                    <asp:Label ID="lblServicios" runat="server" Text="WiFi, TV, Cocina, Estacionamiento"></asp:Label>
+                </p>
+                <p>
+                    <strong>Precio por Noche:</strong>
+                    <asp:Label ID="lblPrecioNoche" runat="server" Text="$25.000"></asp:Label>
+                </p>
+                <asp:Button ID="btnCotizar" runat="server" Text="COTIZAR" CssClass="btn btn-primary" />
             </div>
         </div>
         <div class="row mt-5">

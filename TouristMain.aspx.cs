@@ -16,7 +16,7 @@ public partial class TouristMain : System.Web.UI.Page
         RepeaterSitiosTuristicos.DataBind();
 
         cantidadElementos = context.ZONA_GEOGRAFICA.ToList().Count < 4 ? context.ZONA_GEOGRAFICA.ToList().Count : 4;
-        RepeaterZonas.DataSource = context.ZONA_GEOGRAFICA.ToList().GetRange(0, 4);
+        RepeaterZonas.DataSource = context.ZONA_GEOGRAFICA.ToList().GetRange(0, cantidadElementos);
         RepeaterZonas.DataBind();
     }
 }

@@ -92,94 +92,39 @@
                     <!-- Pestaña de Alojamientos -->
                     <div class="tab-pane fade show active" id="alojamientos">
                         <h4>Alojamientos Disponibles</h4>
-                        <!-- Ejemplo de 5 tarjetas de alojamientos -->
                         <div class="row mt-3">
-                            <!-- Alojamiento 1 -->
-                            <div class="col-md-6 mb-4">
-                                <div class="card">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-4">
-                                            <img src="imagen_alojamiento_1.jpg" class="card-img" alt="Alojamiento 1">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Hotel</h5>
-                                                <p class="card-text">Una descripción breve del alojamiento.</p>
-                                                <p class="card-text">
-                                                    <i class="fa fa-bed"></i>2 Dormitorios | <i
-                                                        class="fa fa-bath"></i>1 Baño
-                                                </p>
-                                                <a href="#" class="btn btn-primary">Ver Alojamiento</a>
+                            <!-- Repeater para las tarjetas de alojamiento -->
+                            <asp:Repeater ID="RepeaterAlojamientos" runat="server">
+                                <ItemTemplate>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card">
+                                            <div class="row no-gutters">
+                                                <div class="col-md-4 d-flex align-items-center ">
+                                                    <img src='<%# Eval("IMAGEN") %>' class="card-img" alt='<%# Eval("NOMBRE") %>' />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><%# Eval("NOMBRE") %></h5>
+                                                        <p class="card-text"><%# Eval("DESCRIPCION_CORTA") %></p>
+                                                        <p class="card-text">
+                                                            <i class="fa fa-bed"></i><%# Eval("DORMITORIOS") %> Dormitorios | 
+                                                            <i class="fa fa-bath"></i><%# Eval("BANIOS") %> Baño
+                                                        </p>
+                                                        <a href='<%# "./TouristAlojamiento.aspx?alojamientoId=" + Eval("ID") %>' class="btn btn-primary">Ver Alojamiento</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="card">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-4">
-                                            <img src="imagen_alojamiento_1.jpg" class="card-img" alt="Alojamiento 1">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Hotel</h5>
-                                                <p class="card-text">Una descripción breve del alojamiento.</p>
-                                                <p class="card-text">
-                                                    <i class="fa fa-bed"></i>2 Dormitorios | <i
-                                                        class="fa fa-bath"></i>1 Baño
-                                                </p>
-                                                <a href="#" class="btn btn-primary">Ver Alojamiento</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="card">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-4">
-                                            <img src="imagen_alojamiento_1.jpg" class="card-img" alt="Alojamiento 1">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Hotel</h5>
-                                                <p class="card-text">Una descripción breve del alojamiento.</p>
-                                                <p class="card-text">
-                                                    <i class="fa fa-bed"></i>2 Dormitorios | <i
-                                                        class="fa fa-bath"></i>1 Baño
-                                                </p>
-                                                <a href="#" class="btn btn-primary">Ver Alojamiento</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="card">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-4">
-                                            <img src="imagen_alojamiento_1.jpg" class="card-img" alt="Alojamiento 1">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Hotel</h5>
-                                                <p class="card-text">Una descripción breve del alojamiento.</p>
-                                                <p class="card-text">
-                                                    <i class="fa fa-bed"></i>2 Dormitorios | <i
-                                                        class="fa fa-bath"></i>1 Baño
-                                                </p>
-                                                <a href="#" class="btn btn-primary">Ver Alojamiento</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
                         </div>
                     </div>
+
                     <!-- Pestaña de Reseñas -->
                     <div class="tab-pane fade" id="reseñas">
                         <h4>Reseñas de los Visitantes</h4>
+
                         <!-- Paginación -->
                         <div class="mt-4">
                             <nav aria-label="Page navigation">
@@ -190,47 +135,31 @@
                                 </ul>
                             </nav>
                         </div>
-                        <!-- Reseñas -->
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <img src="imagen_usuario_1.jpg" alt="Usuario 1" class="rounded-circle mr-3"
-                                        width="50" height="50">
-                                    <div>
-                                        <h5 class="mb-0">Usuario 1</h5>
-                                        <p class="text-muted">Puntuación: 4.5/5 - 15 de octubre de 2023</p>
+
+                        <!-- Repeater para mostrar reseñas -->
+                        <asp:Repeater ID="RepeaterResenas" runat="server">
+                            <ItemTemplate>
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <img src='<%# Eval("RUTA_IMAGEN") %>' alt='<%# Eval("NOMBRE") %>' class="rounded-circle mr-3" width="50" height="50" />
+                                            <div>
+                                                <h5 class="mb-0"><%# Eval("NOMBRE") %></h5>
+                                                <p class="text-muted">Puntuación:<%# Eval("PUNTUACION")%>-5 Fecha: <%#    Eval("FECHA") %></p>
+                                            </div>
+                                        </div>
+                                        <p class="mt-3"><%# Eval("DESCRIPCION") %></p>
                                     </div>
                                 </div>
-                                <p class="mt-3">
-                                    ¡Increíble experiencia en las Cavernas de Mármol! Definitivamente lo
-                                    recomendaría a otros
-                                    viajeros.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <img src="imagen_usuario_2.jpg" alt="Usuario 2" class="rounded-circle mr-3"
-                                        width="50" height="50">
-                                    <div>
-                                        <h5 class="mb-0">Usuario 2</h5>
-                                        <p class="text-muted">Puntuación: 5/5 - 14 de octubre de 2023</p>
-                                    </div>
-                                </div>
-                                <p class="mt-3">
-                                    ¡La belleza natural de las Cavernas de Mármol es impresionante! Una
-                                    visita obligada.
-                                </p>
-                            </div>
-                        </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+
                         <!-- Área de texto para agregar una nueva reseña -->
                         <div class="card mt-3">
                             <div class="card-body">
                                 <h5 class="card-title">Agregar Nueva Reseña</h5>
                                 <div class="form-group">
-                                    <textarea class="form-control" rows="3"
-                                        placeholder="Escribe tu reseña aquí..."></textarea>
+                                    <textarea class="form-control" rows="3" placeholder="Escribe tu reseña aquí..."></textarea>
                                 </div>
                                 <div class="text-right">
                                     <button class="btn btn-primary">Agregar Reseña</button>
@@ -238,6 +167,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <!-- Pestaña de Mapa -->
                     <div class="tab-pane fade" id="mapa">
@@ -255,41 +185,34 @@
             <h2 class="text-center">Imágenes del Lugar Turístico</h2>
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                        class="active" aria-current="true" aria-label="Slide 1">
-                    </button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2">
-                    </button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                        aria-label="Slide 3">
-                    </button>
-                    <!-- Agrega más indicadores según sea necesario -->
+                    <asp:Repeater ID="RepeaterCarouselIndicators" runat="server">
+                        <ItemTemplate>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to='<%# Container.ItemIndex %>'
+                                class='<%# Container.ItemIndex == 0 ? "active" : "" %>' aria-label='<%# "Slide " + (Container.ItemIndex + 1) %>'>
+                            </button>
+                        </ItemTemplate>
+                    </asp:Repeater>
                 </div>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="./assets/img/CapillaMarmol.webp" class="d-block w-100" alt="Imagen 1">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="./assets/img/EspacioDoChile-Isotipo.png" class="d-block w-100" alt="Imagen 2">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="./assets/img/EspacioDoChile-Logo_16-9.png" class="d-block w-100" alt="Imagen 3">
-                    </div>
-                    <!-- Agrega más elementos según sea necesario -->
+                    <asp:Repeater ID="RepeaterCarouselImages" runat="server">
+                        <ItemTemplate>
+                            <div class='<%# "carousel-item" + (Container.ItemIndex == 0 ? " active" : "") %>'>
+                                <img src='<%# Eval("RUTA") %>' class="d-block w-100" alt='<%# Eval("NOMBRE") %>' />
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
         </div>
+
     </div>
 
 </asp:Content>

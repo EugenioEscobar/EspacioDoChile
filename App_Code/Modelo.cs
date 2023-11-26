@@ -25,9 +25,9 @@ public partial class ALOJAMIENTO
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
     public ALOJAMIENTO()
     {
-        this.RESEÑA = new HashSet<RESEÑA>();
         this.RESERVA = new HashSet<RESERVA>();
         this.IMAGENES = new HashSet<IMAGENES>();
+        this.RESEÑA_ALOJAMIENTO = new HashSet<RESEÑA_ALOJAMIENTO>();
     }
 
     public int ID { get; set; }
@@ -38,14 +38,18 @@ public partial class ALOJAMIENTO
     public Nullable<double> LATITUD { get; set; }
     public Nullable<double> LONGITUD { get; set; }
     public Nullable<int> ID_COMUNA { get; set; }
+    public Nullable<int> BANIOS { get; set; }
+    public Nullable<int> DORMITORIOS { get; set; }
+    public Nullable<int> VALOR_NOCHE { get; set; }
+    public Nullable<int> CANT_MAX_PERSONAS { get; set; }
 
     public virtual COMUNA COMUNA { get; set; }
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<RESEÑA> RESEÑA { get; set; }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<RESERVA> RESERVA { get; set; }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<IMAGENES> IMAGENES { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<RESEÑA_ALOJAMIENTO> RESEÑA_ALOJAMIENTO { get; set; }
 }
 
 public partial class COMUNA
@@ -87,7 +91,7 @@ public partial class IMAGENES
     public int ID { get; set; }
     public string NOMBRE { get; set; }
     public string TIPO_IMAGEN { get; set; }
-    public string UBICACION { get; set; }
+    public string RUTA { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<ALOJAMIENTO> ALOJAMIENTO { get; set; }
@@ -112,7 +116,7 @@ public partial class REGION
     public virtual ICollection<COMUNA> COMUNA { get; set; }
 }
 
-public partial class RESEÑA
+public partial class RESEÑA_ALOJAMIENTO
 {
     public int ID { get; set; }
     public string DESCRIPCION { get; set; }
@@ -125,16 +129,31 @@ public partial class RESEÑA
     public virtual USUARIO USUARIO { get; set; }
 }
 
+public partial class RESEÑA_UBICACION
+{
+    public int ID { get; set; }
+    public string DESCRIPCION { get; set; }
+    public Nullable<System.DateTime> FECHA { get; set; }
+    public Nullable<int> ID_USUARIO { get; set; }
+    public Nullable<int> ID_UBICACION { get; set; }
+    public Nullable<double> PUNTUACION { get; set; }
+
+    public virtual ALOJAMIENTO ALOJAMIENTO { get; set; }
+    public virtual USUARIO USUARIO { get; set; }
+    public virtual UBICACION UBICACION { get; set; }
+}
+
 public partial class RESERVA
 {
     public int ID { get; set; }
     public string NOMBRE { get; set; }
     public Nullable<System.DateTime> FECHA_INICIO { get; set; }
     public Nullable<System.DateTime> FECHA_TERMINO { get; set; }
-    public Nullable<int> TOTAL { get; set; }
     public string COMENTARIO { get; set; }
     public Nullable<int> ID_ALOJAMIENTO { get; set; }
     public Nullable<int> ID_USUARIO { get; set; }
+    public Nullable<int> CODIGO_RESERVA { get; set; }
+    public Nullable<double> TOTAL { get; set; }
 
     public virtual ALOJAMIENTO ALOJAMIENTO { get; set; }
     public virtual USUARIO USUARIO { get; set; }
@@ -163,6 +182,7 @@ public partial class UBICACION
     {
         this.IMAGENES = new HashSet<IMAGENES>();
         this.ACTIVIDADES = new HashSet<ACTIVIDADES>();
+        this.RESEÑA_UBICACION = new HashSet<RESEÑA_UBICACION>();
     }
 
     public int ID { get; set; }
@@ -178,6 +198,8 @@ public partial class UBICACION
     public virtual ICollection<IMAGENES> IMAGENES { get; set; }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<ACTIVIDADES> ACTIVIDADES { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<RESEÑA_UBICACION> RESEÑA_UBICACION { get; set; }
 }
 
 public partial class USUARIO
@@ -185,8 +207,9 @@ public partial class USUARIO
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
     public USUARIO()
     {
-        this.RESEÑA = new HashSet<RESEÑA>();
         this.RESERVA = new HashSet<RESERVA>();
+        this.RESEÑA_ALOJAMIENTO = new HashSet<RESEÑA_ALOJAMIENTO>();
+        this.RESEÑA_UBICACION = new HashSet<RESEÑA_UBICACION>();
     }
 
     public int ID { get; set; }
@@ -201,13 +224,16 @@ public partial class USUARIO
     public string DIRECCION { get; set; }
     public Nullable<int> ID_COMUNA { get; set; }
     public Nullable<int> ID_TIPO_USUARIO { get; set; }
+    public string RUTA_IMAGEN { get; set; }
 
     public virtual COMUNA COMUNA { get; set; }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<RESEÑA> RESEÑA { get; set; }
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<RESERVA> RESERVA { get; set; }
     public virtual TIPO_USUARIO TIPO_USUARIO { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<RESEÑA_ALOJAMIENTO> RESEÑA_ALOJAMIENTO { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<RESEÑA_UBICACION> RESEÑA_UBICACION { get; set; }
 }
 
 public partial class ZONA_GEOGRAFICA

@@ -8,6 +8,14 @@
     <title>Espacio Do Chile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link rel="apple-touch-icon" sizes="180x180" href="Content/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="Content/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Content/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="Content/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="Content/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     <style>
         /* ROBOTOMONO-MEDIUM */
         @font-face {
@@ -137,7 +145,7 @@
     <form id="form1" runat="server">
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-12 col-lg-8">
                     <div class="card">
                         <div class="card-header">
                             <img src="Content/img/EspacioDoChile-Isotipo.png" alt="Logo" class="img-fluid" height="100" />
@@ -152,7 +160,13 @@
                                     <label for="contrasena">Contraseña</label>
                                     <asp:TextBox ID="ContrasenaTextBox" runat="server" TextMode="Password" CssClass="form-control" placeholder="Ingresa tu contraseña"></asp:TextBox>
                                 </div>
-                                <asp:Button ID="IniciarSesionButton" runat="server" Text="Iniciar Sesión" CssClass="btn btn-primary mt-3" OnClick="IniciarSesionButton_Click" />
+                                <div class="form-group mt-2">
+                                    <asp:HyperLink ID="LinkPassword" NavigateUrl="~/TouristOlvidoContraseña.aspx" runat="server" Text="Olvidé mi contraseña" CssClass="ms-1" Visible="false" />
+                                </div>
+                                <div class="ms-1">
+                                    <asp:Button ID="IniciarSesionButton" runat="server" Text="Iniciar Sesión" CssClass="btn btn-primary mt-3" OnClick="IniciarSesionButton_Click" />
+                                    <asp:Button ID="Registrarse" runat="server" Text="Registrarse" CssClass="btn btn-outline-primary mt-3" OnClick="Registrarse_Click" />
+                                </div>
                             </asp:Panel>
                             <asp:Label ID="MensajeLabel" runat="server" CssClass="text-danger"></asp:Label>
                         </div>

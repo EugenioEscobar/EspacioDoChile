@@ -8,19 +8,16 @@
         <EntityTypeShape EntityType="ct_espacio_prodModel.ALOJAMIENTO" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="ct_espacio_prodModel.COMUNA" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ct_espacio_prodModel.IMAGENES" Width="1.5" PointX="7.625" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ct_espacio_prodModel.RESEÑA" Width="1.5" PointX="7.5" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ct_espacio_prodModel.RESERVA" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ct_espacio_prodModel.TIPO_USUARIO" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ct_espacio_prodModel.UBICACION" Width="1.5" PointX="9.75" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ct_espacio_prodModel.USUARIO" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ct_espacio_prodModel.ZONA_GEOGRAFICA" Width="1.5" PointX="12.75" PointY="9.375" IsExpanded="true" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__ALOJAMIEN__ID_CO__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="ct_espacio_prodModel.FK__RESEÑA__ID_ALOJA__5629CD9C" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__RESERVA__ID_ALOJ__59063A47" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__UBICACION__ID_CO__403A8C7D" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__USUARIO__ID_COMU__5165187F" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__ZONA_GEOG__ID_CO__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="ct_espacio_prodModel.FK__RESEÑA__ID_USUAR__5535A963" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__RESERVA__ID_USUA__59FA5E80" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__USUARIO__ID_TIPO__52593CB8" ManuallyRouted="false" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__UBICACION__ID_ZO__412EB0B6" ManuallyRouted="false" />
@@ -31,6 +28,13 @@
         <AssociationConnector Association="ct_espacio_prodModel.IMAGENES_DE_ZONA" />
         <EntityTypeShape EntityType="ct_espacio_prodModel.ACTIVIDADES" Width="1.5" PointX="12" PointY="12.75" />
         <AssociationConnector Association="ct_espacio_prodModel.FK__ACTIVIDAD__ID_UB__656C112C" />
+        <EntityTypeShape EntityType="ct_espacio_prodModel.RESEÑA_ALOJAMIENTO" Width="1.5" PointX="10.5" PointY="5.875" />
+        <EntityTypeShape EntityType="ct_espacio_prodModel.RESEÑA_UBICACION" Width="1.5" PointX="7.5" PointY="1.875" />
+        <AssociationConnector Association="ct_espacio_prodModel.FK__RESEÑA_AL__ID_AL__5CD6CB2B" />
+        <AssociationConnector Association="ct_espacio_prodModel.FK__RESEÑA_UB__ID_UB__59063A47" />
+        <AssociationConnector Association="ct_espacio_prodModel.FK__RESEÑA_AL__PUNTU__5BE2A6F2" />
+        <AssociationConnector Association="ct_espacio_prodModel.FK__RESEÑA_UB__ID_US__5812160E" />
+        <AssociationConnector Association="ct_espacio_prodModel.FK__RESEÑA_UB__ID_UB__59063A471" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

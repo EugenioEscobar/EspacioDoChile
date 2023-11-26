@@ -26,14 +26,15 @@ public partial class _Default : System.Web.UI.Page
         if (Autenticar(usuario, contrasena))
         {
             var userDB = context.USUARIO.FirstOrDefault(user=>user.EMAIL == usuario);
+            Session["UsuarioLogueado"] = userDB;
             var destinationPage = context.TIPO_USUARIO.FirstOrDefault(tipo => tipo.ID == userDB.ID_TIPO_USUARIO).ACCESS_PAGE;
             // Autenticación exitosa, redirige a la página de destino.
             Response.Redirect(destinationPage);
         }
         else
         {
-            // Autenticación fallida, muestra un mensaje de error.
             MensajeLabel.Text = "Credenciales incorrectas. Inténtalo de nuevo.";
+            LinkPassword.Visible = true;
         }
     }
 
@@ -61,5 +62,10 @@ public partial class _Default : System.Web.UI.Page
             }
             return stringBuilder.ToString();
         }
+    }
+
+    protected void Registrarse_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/TouristRegistrarse.aspx");
     }
 }

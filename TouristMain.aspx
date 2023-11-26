@@ -35,7 +35,7 @@
                                 <p class="card-text"><%# Eval("DESCRIPCION_CORTA") %></p>
                                 <p class="card-text">Lejanía: <%# Eval("ID_COMUNA") %> kms.</p>
                                 <div class="d-grid gap-2">
-                                    <a href='<%# "TouristUbication.aspx?ubicacionId=" + Eval("ID") %>' class="btn btn-outline-warning">VER</a>
+                                    <a href='<%# "./TouristUbication.aspx?ubicacionId=" + Eval("ID") %>' class="btn btn-outline-warning">VER</a>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 <p class="card-text"><%# Eval("DESCRIPCION_CORTA") %></p>
                                 <p class="card-text">Lejanía: <%# Eval("ID_COMUNA") %> kms.</p>
                                 <div class="d-grid gap-2">
-                                    <a href='<%# "TouristUbication.aspx?ubicacionId=" + Eval("ID") %>' class="btn btn-outline-warning">VER</a>
+                                    <a href='<%# "./TouristUbication.aspx?ubicacionId=" + Eval("ID") %>' class="btn btn-outline-warning">VER</a>
                                 </div>
                             </div>
                         </div>

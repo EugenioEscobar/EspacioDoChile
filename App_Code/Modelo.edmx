@@ -21,11 +21,15 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
           <Property Name="DESCRIPCION_CORTA" Type="nvarchar" MaxLength="50" />
-          <Property Name="DESCRIPCION_LARGA" Type="nvarchar" MaxLength="50" />
-          <Property Name="UBICACION" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRIPCION_LARGA" Type="nvarchar" MaxLength="200" />
+          <Property Name="UBICACION" Type="nvarchar" MaxLength="150" />
           <Property Name="LATITUD" Type="float" />
           <Property Name="LONGITUD" Type="float" />
           <Property Name="ID_COMUNA" Type="int" />
+          <Property Name="BANIOS" Type="int" />
+          <Property Name="DORMITORIOS" Type="int" />
+          <Property Name="VALOR_NOCHE" Type="int" />
+          <Property Name="CANT_MAX_PERSONAS" Type="int" />
         </EntityType>
         <EntityType Name="COMUNA">
           <Key>
@@ -42,7 +46,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
           <Property Name="TIPO_IMAGEN" Type="nvarchar" MaxLength="50" />
-          <Property Name="UBICACION" Type="nvarchar" MaxLength="50" />
+          <Property Name="RUTA" Type="nvarchar" MaxLength="800" />
         </EntityType>
         <EntityType Name="IMAGENES_DE_ALOJAMIENTO">
           <Key>
@@ -73,9 +77,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="RESEÑA">
+        <EntityType Name="RESEÑA_ALOJAMIENTO">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -86,18 +90,30 @@
           <Property Name="ID_ALOJAMIENTO" Type="int" />
           <Property Name="PUNTUACION" Type="float" />
         </EntityType>
+        <EntityType Name="RESEÑA_UBICACION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="200" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="ID_USUARIO" Type="int" />
+          <Property Name="ID_UBICACION" Type="int" />
+          <Property Name="PUNTUACION" Type="float" />
+        </EntityType>
         <EntityType Name="RESERVA">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NOMBRE" Type="nvarchar" MaxLength="15" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
           <Property Name="FECHA_INICIO" Type="date" />
           <Property Name="FECHA_TERMINO" Type="date" />
-          <Property Name="TOTAL" Type="int" />
           <Property Name="COMENTARIO" Type="nvarchar" MaxLength="100" />
           <Property Name="ID_ALOJAMIENTO" Type="int" />
           <Property Name="ID_USUARIO" Type="int" />
+          <Property Name="CODIGO_RESERVA" Type="int" />
+          <Property Name="TOTAL" Type="float" />
         </EntityType>
         <EntityType Name="TIPO_USUARIO">
           <Key>
@@ -134,6 +150,7 @@
           <Property Name="DIRECCION" Type="nvarchar" MaxLength="50" />
           <Property Name="ID_COMUNA" Type="int" />
           <Property Name="ID_TIPO_USUARIO" Type="int" />
+          <Property Name="RUTA_IMAGEN" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ZONA_GEOGRAFICA">
           <Key>
@@ -142,10 +159,10 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
           <Property Name="DESCRIPCION_CORTA" Type="nvarchar" MaxLength="50" />
-          <Property Name="DESCRIPCION_LARGA" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRIPCION_LARGA" Type="nvarchar" MaxLength="200" />
           <Property Name="ID_COMUNA" Type="int" />
         </EntityType>
-        <Association Name="FK__ACTIVIDAD__ID_UB__656C112C">
+        <Association Name="FK__ACTIVIDAD__ID_UB__6383C8BA">
           <End Role="UBICACION" Type="Self.UBICACION" Multiplicity="0..1" />
           <End Role="ACTIVIDADES" Type="Self.ACTIVIDADES" Multiplicity="*" />
           <ReferentialConstraint>
@@ -253,31 +270,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESEÑA__ID_ALOJA__59063A47">
+        <Association Name="FK__RESEÑA_AL__ID_AL__5CD6CB2B">
           <End Role="ALOJAMIENTO" Type="Self.ALOJAMIENTO" Multiplicity="0..1" />
-          <End Role="RESEÑA" Type="Self.RESEÑA" Multiplicity="*" />
+          <End Role="RESEÑA_ALOJAMIENTO" Type="Self.RESEÑA_ALOJAMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ALOJAMIENTO">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="RESEÑA">
+            <Dependent Role="RESEÑA_ALOJAMIENTO">
               <PropertyRef Name="ID_ALOJAMIENTO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESEÑA__ID_USUAR__5812160E">
+        <Association Name="FK__RESEÑA_AL__PUNTU__5BE2A6F2">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
-          <End Role="RESEÑA" Type="Self.RESEÑA" Multiplicity="*" />
+          <End Role="RESEÑA_ALOJAMIENTO" Type="Self.RESEÑA_ALOJAMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USUARIO">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="RESEÑA">
+            <Dependent Role="RESEÑA_ALOJAMIENTO">
               <PropertyRef Name="ID_USUARIO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVA__ID_ALOJ__5BE2A6F2">
+        <Association Name="FK__RESEÑA_UB__ID_UB__59063A47">
+          <End Role="UBICACION" Type="Self.UBICACION" Multiplicity="0..1" />
+          <End Role="RESEÑA_UBICACION" Type="Self.RESEÑA_UBICACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UBICACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RESEÑA_UBICACION">
+              <PropertyRef Name="ID_UBICACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESEÑA_UB__ID_US__5812160E">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="RESEÑA_UBICACION" Type="Self.RESEÑA_UBICACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RESEÑA_UBICACION">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESERVA__ID_ALOJ__5FB337D6">
           <End Role="ALOJAMIENTO" Type="Self.ALOJAMIENTO" Multiplicity="0..1" />
           <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -289,7 +330,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVA__ID_USUA__5CD6CB2B">
+        <Association Name="FK__RESERVA__ID_USUA__60A75C0F">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
           <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -370,13 +411,14 @@
           <EntitySet Name="IMAGENES_DE_UBICACIONES" EntityType="Self.IMAGENES_DE_UBICACIONES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMAGENES_DE_ZONA" EntityType="Self.IMAGENES_DE_ZONA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="REGION" EntityType="Self.REGION" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RESEÑA" EntityType="Self.RESEÑA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESEÑA_ALOJAMIENTO" EntityType="Self.RESEÑA_ALOJAMIENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESEÑA_UBICACION" EntityType="Self.RESEÑA_UBICACION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RESERVA" EntityType="Self.RESERVA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIPO_USUARIO" EntityType="Self.TIPO_USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UBICACION" EntityType="Self.UBICACION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZONA_GEOGRAFICA" EntityType="Self.ZONA_GEOGRAFICA" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__ACTIVIDAD__ID_UB__656C112C" Association="Self.FK__ACTIVIDAD__ID_UB__656C112C">
+          <AssociationSet Name="FK__ACTIVIDAD__ID_UB__6383C8BA" Association="Self.FK__ACTIVIDAD__ID_UB__6383C8BA">
             <End Role="UBICACION" EntitySet="UBICACION" />
             <End Role="ACTIVIDADES" EntitySet="ACTIVIDADES" />
           </AssociationSet>
@@ -412,19 +454,27 @@
             <End Role="ZONA_GEOGRAFICA" EntitySet="ZONA_GEOGRAFICA" />
             <End Role="IMAGENES_DE_ZONA" EntitySet="IMAGENES_DE_ZONA" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESEÑA__ID_ALOJA__59063A47" Association="Self.FK__RESEÑA__ID_ALOJA__59063A47">
+          <AssociationSet Name="FK__RESEÑA_AL__ID_AL__5CD6CB2B" Association="Self.FK__RESEÑA_AL__ID_AL__5CD6CB2B">
             <End Role="ALOJAMIENTO" EntitySet="ALOJAMIENTO" />
-            <End Role="RESEÑA" EntitySet="RESEÑA" />
+            <End Role="RESEÑA_ALOJAMIENTO" EntitySet="RESEÑA_ALOJAMIENTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESEÑA__ID_USUAR__5812160E" Association="Self.FK__RESEÑA__ID_USUAR__5812160E">
+          <AssociationSet Name="FK__RESEÑA_AL__PUNTU__5BE2A6F2" Association="Self.FK__RESEÑA_AL__PUNTU__5BE2A6F2">
             <End Role="USUARIO" EntitySet="USUARIO" />
-            <End Role="RESEÑA" EntitySet="RESEÑA" />
+            <End Role="RESEÑA_ALOJAMIENTO" EntitySet="RESEÑA_ALOJAMIENTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVA__ID_ALOJ__5BE2A6F2" Association="Self.FK__RESERVA__ID_ALOJ__5BE2A6F2">
+          <AssociationSet Name="FK__RESEÑA_UB__ID_UB__59063A47" Association="Self.FK__RESEÑA_UB__ID_UB__59063A47">
+            <End Role="UBICACION" EntitySet="UBICACION" />
+            <End Role="RESEÑA_UBICACION" EntitySet="RESEÑA_UBICACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESEÑA_UB__ID_US__5812160E" Association="Self.FK__RESEÑA_UB__ID_US__5812160E">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="RESEÑA_UBICACION" EntitySet="RESEÑA_UBICACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESERVA__ID_ALOJ__5FB337D6" Association="Self.FK__RESERVA__ID_ALOJ__5FB337D6">
             <End Role="ALOJAMIENTO" EntitySet="ALOJAMIENTO" />
             <End Role="RESERVA" EntitySet="RESERVA" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVA__ID_USUA__5CD6CB2B" Association="Self.FK__RESERVA__ID_USUA__5CD6CB2B">
+          <AssociationSet Name="FK__RESERVA__ID_USUA__60A75C0F" Association="Self.FK__RESERVA__ID_USUA__60A75C0F">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="RESERVA" EntitySet="RESERVA" />
           </AssociationSet>
@@ -460,15 +510,19 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DESCRIPCION_CORTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPCION_LARGA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UBICACION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION_LARGA" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UBICACION" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="LATITUD" Type="Double" />
           <Property Name="LONGITUD" Type="Double" />
           <Property Name="ID_COMUNA" Type="Int32" />
           <NavigationProperty Name="COMUNA" Relationship="Self.FK__ALOJAMIEN__ID_CO__46E78A0C" FromRole="ALOJAMIENTO" ToRole="COMUNA" />
-          <NavigationProperty Name="RESEÑA" Relationship="Self.FK__RESEÑA__ID_ALOJA__5629CD9C" FromRole="ALOJAMIENTO" ToRole="RESEÑA" />
           <NavigationProperty Name="RESERVA" Relationship="Self.FK__RESERVA__ID_ALOJ__59063A47" FromRole="ALOJAMIENTO" ToRole="RESERVA" />
           <NavigationProperty Name="IMAGENES" Relationship="ct_espacio_prodModel.IMAGENES_DE_ALOJAMIENTO" FromRole="ALOJAMIENTO" ToRole="IMAGENES" />
+          <NavigationProperty Name="RESEÑA_ALOJAMIENTO" Relationship="ct_espacio_prodModel.FK__RESEÑA_AL__ID_AL__5CD6CB2B" FromRole="ALOJAMIENTO" ToRole="RESEÑA_ALOJAMIENTO" />
+          <Property Name="BANIOS" Type="Int32" />
+          <Property Name="DORMITORIOS" Type="Int32" />
+          <Property Name="VALOR_NOCHE" Type="Int32" />
+          <Property Name="CANT_MAX_PERSONAS" Type="Int32" />
         </EntityType>
         <EntityType Name="COMUNA">
           <Key>
@@ -490,38 +544,26 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TIPO_IMAGEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UBICACION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ALOJAMIENTO" Relationship="ct_espacio_prodModel.IMAGENES_DE_ALOJAMIENTO" FromRole="IMAGENES" ToRole="ALOJAMIENTO" />
           <NavigationProperty Name="UBICACION1" Relationship="ct_espacio_prodModel.IMAGENES_DE_UBICACIONES" FromRole="IMAGENES" ToRole="UBICACION" />
           <NavigationProperty Name="ZONA_GEOGRAFICA" Relationship="ct_espacio_prodModel.IMAGENES_DE_ZONA" FromRole="IMAGENES" ToRole="ZONA_GEOGRAFICA" />
-        </EntityType>
-        <EntityType Name="RESEÑA">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DESCRIPCION" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="FECHA" Type="DateTime" Precision="0" />
-          <Property Name="ID_USUARIO" Type="Int32" />
-          <Property Name="ID_ALOJAMIENTO" Type="Int32" />
-          <Property Name="PUNTUACION" Type="Double" />
-          <NavigationProperty Name="ALOJAMIENTO" Relationship="Self.FK__RESEÑA__ID_ALOJA__5629CD9C" FromRole="RESEÑA" ToRole="ALOJAMIENTO" />
-          <NavigationProperty Name="USUARIO" Relationship="Self.FK__RESEÑA__ID_USUAR__5535A963" FromRole="RESEÑA" ToRole="USUARIO" />
+          <Property Name="RUTA" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="RESERVA">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOMBRE" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FECHA_INICIO" Type="DateTime" Precision="0" />
           <Property Name="FECHA_TERMINO" Type="DateTime" Precision="0" />
-          <Property Name="TOTAL" Type="Int32" />
           <Property Name="COMENTARIO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ID_ALOJAMIENTO" Type="Int32" />
           <Property Name="ID_USUARIO" Type="Int32" />
           <NavigationProperty Name="ALOJAMIENTO" Relationship="Self.FK__RESERVA__ID_ALOJ__59063A47" FromRole="RESERVA" ToRole="ALOJAMIENTO" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK__RESERVA__ID_USUA__59FA5E80" FromRole="RESERVA" ToRole="USUARIO" />
+          <Property Name="CODIGO_RESERVA" Type="Int32" />
+          <Property Name="TOTAL" Type="Double" />
         </EntityType>
         <EntityType Name="TIPO_USUARIO">
           <Key>
@@ -546,6 +588,7 @@
           <NavigationProperty Name="ZONA_GEOGRAFICA" Relationship="Self.FK__UBICACION__ID_ZO__412EB0B6" FromRole="UBICACION" ToRole="ZONA_GEOGRAFICA" />
           <NavigationProperty Name="IMAGENES" Relationship="ct_espacio_prodModel.IMAGENES_DE_UBICACIONES" FromRole="UBICACION" ToRole="IMAGENES" />
           <NavigationProperty Name="ACTIVIDADES" Relationship="ct_espacio_prodModel.FK__ACTIVIDAD__ID_UB__656C112C" FromRole="UBICACION" ToRole="ACTIVIDADES" />
+          <NavigationProperty Name="RESEÑA_UBICACION" Relationship="ct_espacio_prodModel.FK__RESEÑA_UB__ID_UB__59063A471" FromRole="UBICACION" ToRole="RESEÑA_UBICACION" />
         </EntityType>
         <EntityType Name="USUARIO">
           <Key>
@@ -564,9 +607,11 @@
           <Property Name="ID_COMUNA" Type="Int32" />
           <Property Name="ID_TIPO_USUARIO" Type="Int32" />
           <NavigationProperty Name="COMUNA" Relationship="Self.FK__USUARIO__ID_COMU__5165187F" FromRole="USUARIO" ToRole="COMUNA" />
-          <NavigationProperty Name="RESEÑA" Relationship="Self.FK__RESEÑA__ID_USUAR__5535A963" FromRole="USUARIO" ToRole="RESEÑA" />
           <NavigationProperty Name="RESERVA" Relationship="Self.FK__RESERVA__ID_USUA__59FA5E80" FromRole="USUARIO" ToRole="RESERVA" />
           <NavigationProperty Name="TIPO_USUARIO" Relationship="Self.FK__USUARIO__ID_TIPO__52593CB8" FromRole="USUARIO" ToRole="TIPO_USUARIO" />
+          <NavigationProperty Name="RESEÑA_ALOJAMIENTO" Relationship="ct_espacio_prodModel.FK__RESEÑA_AL__PUNTU__5BE2A6F2" FromRole="USUARIO" ToRole="RESEÑA_ALOJAMIENTO" />
+          <NavigationProperty Name="RESEÑA_UBICACION" Relationship="ct_espacio_prodModel.FK__RESEÑA_UB__ID_US__5812160E" FromRole="USUARIO" ToRole="RESEÑA_UBICACION" />
+          <Property Name="RUTA_IMAGEN" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ZONA_GEOGRAFICA">
           <Key>
@@ -575,7 +620,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DESCRIPCION_CORTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPCION_LARGA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION_LARGA" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ID_COMUNA" Type="Int32" />
           <NavigationProperty Name="COMUNA" Relationship="Self.FK__ZONA_GEOG__ID_CO__38996AB5" FromRole="ZONA_GEOGRAFICA" ToRole="COMUNA" />
           <NavigationProperty Name="UBICACION" Relationship="Self.FK__UBICACION__ID_ZO__412EB0B6" FromRole="ZONA_GEOGRAFICA" ToRole="UBICACION" />
@@ -590,18 +635,6 @@
             </Principal>
             <Dependent Role="ALOJAMIENTO">
               <PropertyRef Name="ID_COMUNA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__RESEÑA__ID_ALOJA__5629CD9C">
-          <End Role="ALOJAMIENTO" Type="Self.ALOJAMIENTO" Multiplicity="0..1" />
-          <End Role="RESEÑA" Type="Self.RESEÑA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ALOJAMIENTO">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="RESEÑA">
-              <PropertyRef Name="ID_ALOJAMIENTO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -653,18 +686,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESEÑA__ID_USUAR__5535A963">
-          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
-          <End Role="RESEÑA" Type="Self.RESEÑA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USUARIO">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="RESEÑA">
-              <PropertyRef Name="ID_USUARIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__RESERVA__ID_USUA__59FA5E80">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
           <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
@@ -705,7 +726,6 @@
           <EntitySet Name="ALOJAMIENTO" EntityType="Self.ALOJAMIENTO" />
           <EntitySet Name="COMUNA" EntityType="Self.COMUNA" />
           <EntitySet Name="IMAGENES" EntityType="Self.IMAGENES" />
-          <EntitySet Name="RESEÑA" EntityType="Self.RESEÑA" />
           <EntitySet Name="RESERVA" EntityType="Self.RESERVA" />
           <EntitySet Name="TIPO_USUARIO" EntityType="Self.TIPO_USUARIO" />
           <EntitySet Name="UBICACION" EntityType="Self.UBICACION" />
@@ -714,10 +734,6 @@
           <AssociationSet Name="FK__ALOJAMIEN__ID_CO__46E78A0C" Association="Self.FK__ALOJAMIEN__ID_CO__46E78A0C">
             <End Role="COMUNA" EntitySet="COMUNA" />
             <End Role="ALOJAMIENTO" EntitySet="ALOJAMIENTO" />
-          </AssociationSet>
-          <AssociationSet Name="FK__RESEÑA__ID_ALOJA__5629CD9C" Association="Self.FK__RESEÑA__ID_ALOJA__5629CD9C">
-            <End Role="ALOJAMIENTO" EntitySet="ALOJAMIENTO" />
-            <End Role="RESEÑA" EntitySet="RESEÑA" />
           </AssociationSet>
           <AssociationSet Name="FK__RESERVA__ID_ALOJ__59063A47" Association="Self.FK__RESERVA__ID_ALOJ__59063A47">
             <End Role="ALOJAMIENTO" EntitySet="ALOJAMIENTO" />
@@ -734,10 +750,6 @@
           <AssociationSet Name="FK__ZONA_GEOG__ID_CO__38996AB5" Association="Self.FK__ZONA_GEOG__ID_CO__38996AB5">
             <End Role="COMUNA" EntitySet="COMUNA" />
             <End Role="ZONA_GEOGRAFICA" EntitySet="ZONA_GEOGRAFICA" />
-          </AssociationSet>
-          <AssociationSet Name="FK__RESEÑA__ID_USUAR__5535A963" Association="Self.FK__RESEÑA__ID_USUAR__5535A963">
-            <End Role="USUARIO" EntitySet="USUARIO" />
-            <End Role="RESEÑA" EntitySet="RESEÑA" />
           </AssociationSet>
           <AssociationSet Name="FK__RESERVA__ID_USUA__59FA5E80" Association="Self.FK__RESERVA__ID_USUA__59FA5E80">
             <End Role="USUARIO" EntitySet="USUARIO" />
@@ -773,13 +785,35 @@
             <End Role="UBICACION" EntitySet="UBICACION" />
             <End Role="ACTIVIDADES" EntitySet="ACTIVIDADES" />
           </AssociationSet>
+          <EntitySet Name="RESEÑA_ALOJAMIENTO" EntityType="ct_espacio_prodModel.RESEÑA_ALOJAMIENTO" />
+          <EntitySet Name="RESEÑA_UBICACION" EntityType="ct_espacio_prodModel.RESEÑA_UBICACION" />
+          <AssociationSet Name="FK__RESEÑA_AL__ID_AL__5CD6CB2B" Association="ct_espacio_prodModel.FK__RESEÑA_AL__ID_AL__5CD6CB2B">
+            <End Role="ALOJAMIENTO" EntitySet="ALOJAMIENTO" />
+            <End Role="RESEÑA_ALOJAMIENTO" EntitySet="RESEÑA_ALOJAMIENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESEÑA_UB__ID_UB__59063A47" Association="ct_espacio_prodModel.FK__RESEÑA_UB__ID_UB__59063A47">
+            <End Role="ALOJAMIENTO" EntitySet="ALOJAMIENTO" />
+            <End Role="RESEÑA_UBICACION" EntitySet="RESEÑA_UBICACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESEÑA_AL__PUNTU__5BE2A6F2" Association="ct_espacio_prodModel.FK__RESEÑA_AL__PUNTU__5BE2A6F2">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="RESEÑA_ALOJAMIENTO" EntitySet="RESEÑA_ALOJAMIENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESEÑA_UB__ID_US__5812160E" Association="ct_espacio_prodModel.FK__RESEÑA_UB__ID_US__5812160E">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="RESEÑA_UBICACION" EntitySet="RESEÑA_UBICACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RESEÑA_UB__ID_UB__59063A471" Association="ct_espacio_prodModel.FK__RESEÑA_UB__ID_UB__59063A471">
+            <End Role="UBICACION" EntitySet="UBICACION" />
+            <End Role="RESEÑA_UBICACION" EntitySet="RESEÑA_UBICACION" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="REGION">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="COMUNA" Relationship="ct_espacio_prodModel.FK__COMUNA__ID_REGIO__5DCAEF64" FromRole="REGION" ToRole="COMUNA" />
         </EntityType>
         <Association Name="FK__COMUNA__ID_REGIO__5DCAEF64">
@@ -828,6 +862,93 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="RESEÑA_ALOJAMIENTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA" Type="DateTime" Precision="0" />
+          <Property Name="ID_USUARIO" Type="Int32" />
+          <Property Name="ID_ALOJAMIENTO" Type="Int32" />
+          <Property Name="PUNTUACION" Type="Double" />
+          <NavigationProperty Name="ALOJAMIENTO" Relationship="ct_espacio_prodModel.FK__RESEÑA_AL__ID_AL__5CD6CB2B" FromRole="RESEÑA_ALOJAMIENTO" ToRole="ALOJAMIENTO" />
+          <NavigationProperty Name="USUARIO" Relationship="ct_espacio_prodModel.FK__RESEÑA_AL__PUNTU__5BE2A6F2" FromRole="RESEÑA_ALOJAMIENTO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="RESEÑA_UBICACION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA" Type="DateTime" Precision="0" />
+          <Property Name="ID_USUARIO" Type="Int32" />
+          <Property Name="ID_UBICACION" Type="Int32" />
+          <Property Name="PUNTUACION" Type="Double" />
+          <NavigationProperty Name="ALOJAMIENTO" Relationship="ct_espacio_prodModel.FK__RESEÑA_UB__ID_UB__59063A47" FromRole="RESEÑA_UBICACION" ToRole="ALOJAMIENTO" />
+          <NavigationProperty Name="USUARIO" Relationship="ct_espacio_prodModel.FK__RESEÑA_UB__ID_US__5812160E" FromRole="RESEÑA_UBICACION" ToRole="USUARIO" />
+          <NavigationProperty Name="UBICACION" Relationship="ct_espacio_prodModel.FK__RESEÑA_UB__ID_UB__59063A471" FromRole="RESEÑA_UBICACION" ToRole="UBICACION" />
+        </EntityType>
+        <Association Name="FK__RESEÑA_AL__ID_AL__5CD6CB2B">
+          <End Type="ct_espacio_prodModel.ALOJAMIENTO" Role="ALOJAMIENTO" Multiplicity="0..1" />
+          <End Type="ct_espacio_prodModel.RESEÑA_ALOJAMIENTO" Role="RESEÑA_ALOJAMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALOJAMIENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RESEÑA_ALOJAMIENTO">
+              <PropertyRef Name="ID_ALOJAMIENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESEÑA_UB__ID_UB__59063A47">
+          <End Type="ct_espacio_prodModel.ALOJAMIENTO" Role="ALOJAMIENTO" Multiplicity="0..1" />
+          <End Type="ct_espacio_prodModel.RESEÑA_UBICACION" Role="RESEÑA_UBICACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALOJAMIENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RESEÑA_UBICACION">
+              <PropertyRef Name="ID_UBICACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESEÑA_AL__PUNTU__5BE2A6F2">
+          <End Type="ct_espacio_prodModel.USUARIO" Role="USUARIO" Multiplicity="0..1" />
+          <End Type="ct_espacio_prodModel.RESEÑA_ALOJAMIENTO" Role="RESEÑA_ALOJAMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RESEÑA_ALOJAMIENTO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESEÑA_UB__ID_US__5812160E">
+          <End Type="ct_espacio_prodModel.USUARIO" Role="USUARIO" Multiplicity="0..1" />
+          <End Type="ct_espacio_prodModel.RESEÑA_UBICACION" Role="RESEÑA_UBICACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RESEÑA_UBICACION">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RESEÑA_UB__ID_UB__59063A471">
+          <End Type="ct_espacio_prodModel.UBICACION" Role="UBICACION" Multiplicity="0..1" />
+          <End Type="ct_espacio_prodModel.RESEÑA_UBICACION" Role="RESEÑA_UBICACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UBICACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RESEÑA_UBICACION">
+              <PropertyRef Name="ID_UBICACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -837,6 +958,10 @@
           <EntitySetMapping Name="ALOJAMIENTO">
             <EntityTypeMapping TypeName="ct_espacio_prodModel.ALOJAMIENTO">
               <MappingFragment StoreEntitySet="ALOJAMIENTO">
+                <ScalarProperty Name="CANT_MAX_PERSONAS" ColumnName="CANT_MAX_PERSONAS" />
+                <ScalarProperty Name="VALOR_NOCHE" ColumnName="VALOR_NOCHE" />
+                <ScalarProperty Name="DORMITORIOS" ColumnName="DORMITORIOS" />
+                <ScalarProperty Name="BANIOS" ColumnName="BANIOS" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="DESCRIPCION_CORTA" ColumnName="DESCRIPCION_CORTA" />
@@ -860,33 +985,22 @@
           <EntitySetMapping Name="IMAGENES">
             <EntityTypeMapping TypeName="ct_espacio_prodModel.IMAGENES">
               <MappingFragment StoreEntitySet="IMAGENES">
+                <ScalarProperty Name="RUTA" ColumnName="RUTA" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="TIPO_IMAGEN" ColumnName="TIPO_IMAGEN" />
-                <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RESEÑA">
-            <EntityTypeMapping TypeName="ct_espacio_prodModel.RESEÑA">
-              <MappingFragment StoreEntitySet="RESEÑA">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
-                <ScalarProperty Name="ID_ALOJAMIENTO" ColumnName="ID_ALOJAMIENTO" />
-                <ScalarProperty Name="PUNTUACION" ColumnName="PUNTUACION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RESERVA">
             <EntityTypeMapping TypeName="ct_espacio_prodModel.RESERVA">
               <MappingFragment StoreEntitySet="RESERVA">
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="CODIGO_RESERVA" ColumnName="CODIGO_RESERVA" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
                 <ScalarProperty Name="FECHA_TERMINO" ColumnName="FECHA_TERMINO" />
-                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
                 <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
                 <ScalarProperty Name="ID_ALOJAMIENTO" ColumnName="ID_ALOJAMIENTO" />
                 <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
@@ -917,6 +1031,7 @@
           <EntitySetMapping Name="USUARIO">
             <EntityTypeMapping TypeName="ct_espacio_prodModel.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="RUTA_IMAGEN" ColumnName="RUTA_IMAGEN" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
                 <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
@@ -981,6 +1096,30 @@
                 <ScalarProperty Name="ID_UBICACION" ColumnName="ID_UBICACION" />
                 <ScalarProperty Name="DESCRIPCION_LARGA" ColumnName="DESCRIPCION_LARGA" />
                 <ScalarProperty Name="DESCRIPCION_CORTA" ColumnName="DESCRIPCION_CORTA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESEÑA_ALOJAMIENTO">
+            <EntityTypeMapping TypeName="ct_espacio_prodModel.RESEÑA_ALOJAMIENTO">
+              <MappingFragment StoreEntitySet="RESEÑA_ALOJAMIENTO">
+                <ScalarProperty Name="PUNTUACION" ColumnName="PUNTUACION" />
+                <ScalarProperty Name="ID_ALOJAMIENTO" ColumnName="ID_ALOJAMIENTO" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESEÑA_UBICACION">
+            <EntityTypeMapping TypeName="ct_espacio_prodModel.RESEÑA_UBICACION">
+              <MappingFragment StoreEntitySet="RESEÑA_UBICACION">
+                <ScalarProperty Name="PUNTUACION" ColumnName="PUNTUACION" />
+                <ScalarProperty Name="ID_UBICACION" ColumnName="ID_UBICACION" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

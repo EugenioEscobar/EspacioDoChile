@@ -73,4 +73,10 @@ public partial class SiteMaster : MasterPage
     {
         Context.GetOwinContext().Authentication.SignOut();
     }
+
+    protected void btnCerrarSession_Click(object sender, EventArgs e)
+    {
+        Session["UsuarioLogueado"] = null;
+        Response.Redirect("~/Default.aspx");
+    }
 }
