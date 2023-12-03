@@ -1,28 +1,37 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="TouristMain.aspx.cs" Inherits="TouristMain" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
-
-    <div id="mapa" style="height: 400px;"></div>
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaE5vo25XRgd_JLNsLfDPYzbjnfOvHLjM&callback=console.debug&libraries=maps,marker&v=beta">
+    </script>
+  <div class="div" style="height: 400px;">
+    <gmp-map center="-33.490169525146484,-70.61679077148438" zoom="14" map-id="DEMO_MAP_ID" style="height: 100%;">
+      <gmp-advanced-marker position="-33.490169525146484,-70.61679077148438" title="My location">
+      </gmp-advanced-marker>
+    </gmp-map>
+  </div>
     <div class="row">
         <div class="col-8 mx-auto mt-4">
             <div class="input-group">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Ubicación Turistica</button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Ubicaciones Geograficas</a></li>
-                    <li><a class="dropdown-item" href="#">Sitios Turísticos</a></li>
-                </ul>
-                <input type="text" class="form-control" placeholder="Buscar alojamientos o lugares turísticos">
-                <button class="btn btn-warning btn-lg" type="submit">
+
+                <asp:DropDownList ID="ddlUbicacionTuristica" runat="server" CssClass="btn btn-outline-secondary dropdown-toggle">
+                    <asp:ListItem Text="Ubicaciones Geográficas" Value="geo"></asp:ListItem>
+                    <asp:ListItem Text="Sitios Turísticos" Value="sitios"></asp:ListItem>
+                </asp:DropDownList>
+
+                <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control" placeholder="Buscar alojamientos o lugares turísticos"></asp:TextBox>
+
+                <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-warning btn-lg" OnClick="btnBuscar_Click">
                     <i class="fas fa-search"></i>Buscar
-                </button>
+                </asp:LinkButton>
+
             </div>
         </div>
+
     </div>
 
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Sitios turísticos en [Zona 1]</h1>
+        <h1 class="text-center mb-4">Atracciones turísticas</h1>
         <!-- Tarjetas de sitios turísticos -->
         <div class="row d-flex align-items-stretch">
             <asp:Repeater ID="RepeaterSitiosTuristicos" runat="server">
@@ -67,21 +76,4 @@
             </asp:Repeater>
         </div>
     </div>
-    <script>
-        function inicializarMapa() {
-            var coordenadas = { lat: -33.5164885, lng: -70.6245985 };
-            var mapa = new google.maps.Map(document.getElementById('mapa'), {
-                center: coordenadas,
-                zoom: 15
-            });
-
-            var marcador = new google.maps.Marker({
-                position: coordenadas,
-                map: mapa,
-                title: 'Ubicación del Usuario'
-            });
-        }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?callback=inicializarMapa" async defer></script>
 </asp:Content>
-

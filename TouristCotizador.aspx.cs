@@ -12,13 +12,16 @@ public partial class TouristCotizador : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+
             int alojamientoId = Int16.Parse(Request.QueryString["alojamientoId"]);
 
             EspacioEntites context = new EspacioEntites();
 
             var alojamientoDB = context.ALOJAMIENTO.FirstOrDefault(alo => alo.ID == alojamientoId);
 
-            var user = (USUARIO)Session["UsuarioLogueado"];
+            var userSession = Session["UsuarioLogueado"];
+            if (userSession == null) { Response.Redirect("~/Default.aspx"); }
+            var user = (USUARIO)userSession;
 
             txtNombre.Text = user.NOMBRE;
             txtEmail.Text = user.EMAIL;
@@ -77,7 +80,8 @@ public partial class TouristCotizador : System.Web.UI.Page
         foreach (var reservas in reservasExistentes)
         {
             if ((reservas.FECHA_INICIO <= nuevareserva.FECHA_INICIO && reservas.FECHA_TERMINO > nuevareserva.FECHA_INICIO) ||
-                (reservas.FECHA_INICIO >= nuevareserva.FECHA_INICIO && reservas.FECHA_INICIO < nuevareserva.FECHA_TERMINO))
+                (reservas.FECHA_INICIO >= nuevareserva.FECHA_INICIO && reservas.FECHA_INICIO < nuevareserva.FECHA_TERMINO) ||
+                (reservas.FECHA_INICIO <= nuevareserva.FECHA_INICIO && reservas.FECHA_TERMINO >= nuevareserva.FECHA_TERMINO))
             {
                 return false;
             }

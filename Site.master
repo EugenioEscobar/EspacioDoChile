@@ -16,7 +16,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="Content/img/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="Content/img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="Content/img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="Content/img/favicon/site.webmanifest">
     <link rel="mask-icon" href="Content/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
@@ -38,7 +37,9 @@
                     <% if (Session["UsuarioLogueado"] != null)
                         {
                             var user = (USUARIO)Session["UsuarioLogueado"];
-                            var imageUrl = user.RUTA_IMAGEN;
+                            var imageUrl = user.RUTA_IMAGEN == null ?
+                                "https://e7.pngegg.com/pngimages/627/693/png-clipart-computer-icons-user-user-icon-face-monochrome-thumbnail.png" :
+                                user.RUTA_IMAGEN;
                             var userName = user.NOMBRE; %>
                     <li class="nav-item dropdown me-5 ">
                         <a class="nav-link dropdown-toggle text-light" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

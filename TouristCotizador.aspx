@@ -124,8 +124,8 @@
             let fechaSalidaCalculo = new Date(fechaSalida);
 
             // Validar si la fecha de salida es anterior a la fecha de llegada
-            if (fechaSalidaCalculo < fechaLlegadaCalculo) {
-                alert("La fecha de salida no puede ser anterior a la fecha de llegada. Se ajustará al día siguiente de la fecha de llegada.");
+            if (fechaSalidaCalculo <= fechaLlegadaCalculo) {
+                alert("La fecha de salida no puede ser anterior o igual a la fecha de llegada. Se ajustará al día siguiente de la fecha de llegada.");
                 // Ajustar la fecha de salida
                 fechaSalidaCalculo = new Date(fechaLlegadaCalculo.getTime() + (1000 * 60 * 60 * 24));
                 fechaSalidaEl.value = fechaSalidaCalculo.toISOString().split('T')[0];

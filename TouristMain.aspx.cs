@@ -19,4 +19,9 @@ public partial class TouristMain : System.Web.UI.Page
         RepeaterZonas.DataSource = context.ZONA_GEOGRAFICA.ToList().GetRange(0, cantidadElementos);
         RepeaterZonas.DataBind();
     }
+
+    protected void btnBuscar_Click(object sender, EventArgs e)
+    {
+
+    }
 }
