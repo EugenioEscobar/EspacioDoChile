@@ -15,8 +15,8 @@
             <div class="input-group">
 
                 <asp:DropDownList ID="ddlUbicacionTuristica" runat="server" CssClass="btn btn-outline-secondary dropdown-toggle">
-                    <asp:ListItem Text="Ubicaciones Geográficas" Value="geo"></asp:ListItem>
-                    <asp:ListItem Text="Sitios Turísticos" Value="sitios"></asp:ListItem>
+                    <asp:ListItem Text="Zonas Geográficas" Value="geo"></asp:ListItem>
+                    <asp:ListItem Text="Atracciones Turísticos" Value="sitios"></asp:ListItem>
                 </asp:DropDownList>
 
                 <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control" placeholder="Buscar alojamientos o lugares turísticos"></asp:TextBox>
@@ -30,7 +30,7 @@
 
     </div>
 
-    <div class="container mt-5">
+    <div class="container mt-5" id="divAtracciones" runat="server">
         <h1 class="text-center mb-4">Atracciones turísticas</h1>
         <!-- Tarjetas de sitios turísticos -->
         <div class="row d-flex align-items-stretch">
@@ -53,7 +53,7 @@
             </asp:Repeater>
         </div>
     </div>
-    <div class="container mt-5">
+    <div class="container mt-5" id="divZonas" runat="server">
         <h1 class="text-center mb-4">Zonas Geográficas en Chile</h1>
         <!-- Tarjetas de sitios turísticos -->
         <div class="row d-flex align-items-stretch">

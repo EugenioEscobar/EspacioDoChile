@@ -26,9 +26,9 @@
           <Property Name="LATITUD" Type="float" />
           <Property Name="LONGITUD" Type="float" />
           <Property Name="ID_COMUNA" Type="int" />
+          <Property Name="VALOR_NOCHE" Type="int" />
           <Property Name="BANIOS" Type="int" />
           <Property Name="DORMITORIOS" Type="int" />
-          <Property Name="VALOR_NOCHE" Type="int" />
           <Property Name="CANT_MAX_PERSONAS" Type="int" />
         </EntityType>
         <EntityType Name="COMUNA">
@@ -109,11 +109,11 @@
           <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
           <Property Name="FECHA_INICIO" Type="date" />
           <Property Name="FECHA_TERMINO" Type="date" />
+          <Property Name="TOTAL" Type="float" />
           <Property Name="COMENTARIO" Type="nvarchar" MaxLength="100" />
           <Property Name="ID_ALOJAMIENTO" Type="int" />
           <Property Name="ID_USUARIO" Type="int" />
           <Property Name="CODIGO_RESERVA" Type="int" />
-          <Property Name="TOTAL" Type="float" />
         </EntityType>
         <EntityType Name="TIPO_USUARIO">
           <Key>
@@ -158,11 +158,11 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
-          <Property Name="DESCRIPCION_CORTA" Type="nvarchar" MaxLength="50" />
-          <Property Name="DESCRIPCION_LARGA" Type="nvarchar" MaxLength="200" />
+          <Property Name="DESCRIPCION_CORTA" Type="nvarchar(max)" />
+          <Property Name="DESCRIPCION_LARGA" Type="nvarchar(max)" />
           <Property Name="ID_COMUNA" Type="int" />
         </EntityType>
-        <Association Name="FK__ACTIVIDAD__ID_UB__6383C8BA">
+        <Association Name="FK__ACTIVIDAD__ID_UB__68487DD7">
           <End Role="UBICACION" Type="Self.UBICACION" Multiplicity="0..1" />
           <End Role="ACTIVIDADES" Type="Self.ACTIVIDADES" Multiplicity="*" />
           <ReferentialConstraint>
@@ -174,7 +174,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ALOJAMIEN__ID_CO__4BAC3F29">
+        <Association Name="FK__ALOJAMIEN__ID_CO__4F7CD00D">
           <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="0..1" />
           <End Role="ALOJAMIENTO" Type="Self.ALOJAMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -198,7 +198,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__IMAGENES___ID_AL__4E88ABD4">
+        <Association Name="FK__IMAGENES___ID_AL__52593CB8">
           <End Role="ALOJAMIENTO" Type="Self.ALOJAMIENTO" Multiplicity="1" />
           <End Role="IMAGENES_DE_ALOJAMIENTO" Type="Self.IMAGENES_DE_ALOJAMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -234,7 +234,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__IMAGENES___ID_IM__4F7CD00D">
+        <Association Name="FK__IMAGENES___ID_IM__534D60F1">
           <End Role="IMAGENES" Type="Self.IMAGENES" Multiplicity="1" />
           <End Role="IMAGENES_DE_ALOJAMIENTO" Type="Self.IMAGENES_DE_ALOJAMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -270,7 +270,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESEÑA_AL__ID_AL__5CD6CB2B">
+        <Association Name="FK__RESEÑA_AL__ID_AL__619B8048">
           <End Role="ALOJAMIENTO" Type="Self.ALOJAMIENTO" Multiplicity="0..1" />
           <End Role="RESEÑA_ALOJAMIENTO" Type="Self.RESEÑA_ALOJAMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -282,7 +282,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESEÑA_AL__PUNTU__5BE2A6F2">
+        <Association Name="FK__RESEÑA_AL__PUNTU__60A75C0F">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
           <End Role="RESEÑA_ALOJAMIENTO" Type="Self.RESEÑA_ALOJAMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -294,7 +294,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESEÑA_UB__ID_UB__59063A47">
+        <Association Name="FK__RESEÑA_UB__ID_UB__5DCAEF64">
           <End Role="UBICACION" Type="Self.UBICACION" Multiplicity="0..1" />
           <End Role="RESEÑA_UBICACION" Type="Self.RESEÑA_UBICACION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -306,7 +306,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESEÑA_UB__ID_US__5812160E">
+        <Association Name="FK__RESEÑA_UB__ID_US__5CD6CB2B">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
           <End Role="RESEÑA_UBICACION" Type="Self.RESEÑA_UBICACION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -318,7 +318,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVA__ID_ALOJ__5FB337D6">
+        <Association Name="FK__RESERVA__ID_ALOJ__6477ECF3">
           <End Role="ALOJAMIENTO" Type="Self.ALOJAMIENTO" Multiplicity="0..1" />
           <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -330,7 +330,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVA__ID_USUA__60A75C0F">
+        <Association Name="FK__RESERVA__ID_USUA__656C112C">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
           <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -366,7 +366,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USUARIO__ID_COMU__5441852A">
+        <Association Name="FK__USUARIO__ID_COMU__59063A47">
           <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="0..1" />
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -378,7 +378,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USUARIO__ID_TIPO__5535A963">
+        <Association Name="FK__USUARIO__ID_TIPO__59FA5E80">
           <End Role="TIPO_USUARIO" Type="Self.TIPO_USUARIO" Multiplicity="0..1" />
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -418,11 +418,11 @@
           <EntitySet Name="UBICACION" EntityType="Self.UBICACION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZONA_GEOGRAFICA" EntityType="Self.ZONA_GEOGRAFICA" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__ACTIVIDAD__ID_UB__6383C8BA" Association="Self.FK__ACTIVIDAD__ID_UB__6383C8BA">
+          <AssociationSet Name="FK__ACTIVIDAD__ID_UB__68487DD7" Association="Self.FK__ACTIVIDAD__ID_UB__68487DD7">
             <End Role="UBICACION" EntitySet="UBICACION" />
             <End Role="ACTIVIDADES" EntitySet="ACTIVIDADES" />
           </AssociationSet>
-          <AssociationSet Name="FK__ALOJAMIEN__ID_CO__4BAC3F29" Association="Self.FK__ALOJAMIEN__ID_CO__4BAC3F29">
+          <AssociationSet Name="FK__ALOJAMIEN__ID_CO__4F7CD00D" Association="Self.FK__ALOJAMIEN__ID_CO__4F7CD00D">
             <End Role="COMUNA" EntitySet="COMUNA" />
             <End Role="ALOJAMIENTO" EntitySet="ALOJAMIENTO" />
           </AssociationSet>
@@ -430,7 +430,7 @@
             <End Role="REGION" EntitySet="REGION" />
             <End Role="COMUNA" EntitySet="COMUNA" />
           </AssociationSet>
-          <AssociationSet Name="FK__IMAGENES___ID_AL__4E88ABD4" Association="Self.FK__IMAGENES___ID_AL__4E88ABD4">
+          <AssociationSet Name="FK__IMAGENES___ID_AL__52593CB8" Association="Self.FK__IMAGENES___ID_AL__52593CB8">
             <End Role="ALOJAMIENTO" EntitySet="ALOJAMIENTO" />
             <End Role="IMAGENES_DE_ALOJAMIENTO" EntitySet="IMAGENES_DE_ALOJAMIENTO" />
           </AssociationSet>
@@ -442,7 +442,7 @@
             <End Role="IMAGENES" EntitySet="IMAGENES" />
             <End Role="IMAGENES_DE_UBICACIONES" EntitySet="IMAGENES_DE_UBICACIONES" />
           </AssociationSet>
-          <AssociationSet Name="FK__IMAGENES___ID_IM__4F7CD00D" Association="Self.FK__IMAGENES___ID_IM__4F7CD00D">
+          <AssociationSet Name="FK__IMAGENES___ID_IM__534D60F1" Association="Self.FK__IMAGENES___ID_IM__534D60F1">
             <End Role="IMAGENES" EntitySet="IMAGENES" />
             <End Role="IMAGENES_DE_ALOJAMIENTO" EntitySet="IMAGENES_DE_ALOJAMIENTO" />
           </AssociationSet>
@@ -454,27 +454,27 @@
             <End Role="ZONA_GEOGRAFICA" EntitySet="ZONA_GEOGRAFICA" />
             <End Role="IMAGENES_DE_ZONA" EntitySet="IMAGENES_DE_ZONA" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESEÑA_AL__ID_AL__5CD6CB2B" Association="Self.FK__RESEÑA_AL__ID_AL__5CD6CB2B">
+          <AssociationSet Name="FK__RESEÑA_AL__ID_AL__619B8048" Association="Self.FK__RESEÑA_AL__ID_AL__619B8048">
             <End Role="ALOJAMIENTO" EntitySet="ALOJAMIENTO" />
             <End Role="RESEÑA_ALOJAMIENTO" EntitySet="RESEÑA_ALOJAMIENTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESEÑA_AL__PUNTU__5BE2A6F2" Association="Self.FK__RESEÑA_AL__PUNTU__5BE2A6F2">
+          <AssociationSet Name="FK__RESEÑA_AL__PUNTU__60A75C0F" Association="Self.FK__RESEÑA_AL__PUNTU__60A75C0F">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="RESEÑA_ALOJAMIENTO" EntitySet="RESEÑA_ALOJAMIENTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESEÑA_UB__ID_UB__59063A47" Association="Self.FK__RESEÑA_UB__ID_UB__59063A47">
+          <AssociationSet Name="FK__RESEÑA_UB__ID_UB__5DCAEF64" Association="Self.FK__RESEÑA_UB__ID_UB__5DCAEF64">
             <End Role="UBICACION" EntitySet="UBICACION" />
             <End Role="RESEÑA_UBICACION" EntitySet="RESEÑA_UBICACION" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESEÑA_UB__ID_US__5812160E" Association="Self.FK__RESEÑA_UB__ID_US__5812160E">
+          <AssociationSet Name="FK__RESEÑA_UB__ID_US__5CD6CB2B" Association="Self.FK__RESEÑA_UB__ID_US__5CD6CB2B">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="RESEÑA_UBICACION" EntitySet="RESEÑA_UBICACION" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVA__ID_ALOJ__5FB337D6" Association="Self.FK__RESERVA__ID_ALOJ__5FB337D6">
+          <AssociationSet Name="FK__RESERVA__ID_ALOJ__6477ECF3" Association="Self.FK__RESERVA__ID_ALOJ__6477ECF3">
             <End Role="ALOJAMIENTO" EntitySet="ALOJAMIENTO" />
             <End Role="RESERVA" EntitySet="RESERVA" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVA__ID_USUA__60A75C0F" Association="Self.FK__RESERVA__ID_USUA__60A75C0F">
+          <AssociationSet Name="FK__RESERVA__ID_USUA__656C112C" Association="Self.FK__RESERVA__ID_USUA__656C112C">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="RESERVA" EntitySet="RESERVA" />
           </AssociationSet>
@@ -486,11 +486,11 @@
             <End Role="ZONA_GEOGRAFICA" EntitySet="ZONA_GEOGRAFICA" />
             <End Role="UBICACION" EntitySet="UBICACION" />
           </AssociationSet>
-          <AssociationSet Name="FK__USUARIO__ID_COMU__5441852A" Association="Self.FK__USUARIO__ID_COMU__5441852A">
+          <AssociationSet Name="FK__USUARIO__ID_COMU__59063A47" Association="Self.FK__USUARIO__ID_COMU__59063A47">
             <End Role="COMUNA" EntitySet="COMUNA" />
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
-          <AssociationSet Name="FK__USUARIO__ID_TIPO__5535A963" Association="Self.FK__USUARIO__ID_TIPO__5535A963">
+          <AssociationSet Name="FK__USUARIO__ID_TIPO__59FA5E80" Association="Self.FK__USUARIO__ID_TIPO__59FA5E80">
             <End Role="TIPO_USUARIO" EntitySet="TIPO_USUARIO" />
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
@@ -619,8 +619,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPCION_CORTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPCION_LARGA" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION_CORTA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION_LARGA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ID_COMUNA" Type="Int32" />
           <NavigationProperty Name="COMUNA" Relationship="Self.FK__ZONA_GEOG__ID_CO__38996AB5" FromRole="ZONA_GEOGRAFICA" ToRole="COMUNA" />
           <NavigationProperty Name="UBICACION" Relationship="Self.FK__UBICACION__ID_ZO__412EB0B6" FromRole="ZONA_GEOGRAFICA" ToRole="UBICACION" />

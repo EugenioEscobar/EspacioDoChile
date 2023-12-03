@@ -22,6 +22,30 @@ public partial class TouristMain : System.Web.UI.Page
 
     protected void btnBuscar_Click(object sender, EventArgs e)
     {
+        EspacioEntites context = new EspacioEntites();
+        
+        string descripcion = txtBuscar.Text;
 
+        if(ddlUbicacionTuristica.SelectedValue== "geo")
+        {
+            divAtracciones.Visible = false;
+            divZonas.Visible = true;
+
+            var elements = context.ZONA_GEOGRAFICA.Where(zona => zona.NOMBRE.Contains(descripcion)).ToList();
+            RepeaterZonas.DataSource = elements;
+            RepeaterZonas.DataBind();
+        }
+        else
+        {
+            divAtracciones.Visible = true;
+            divZonas.Visible = false;
+
+            var elements = context.UBICACION.Where(zona => zona.NOMBRE.Contains(descripcion)).ToList();
+            RepeaterSitiosTuristicos.DataSource = elements;
+            RepeaterSitiosTuristicos.DataBind();
+        }
+
+
+        
     }
 }

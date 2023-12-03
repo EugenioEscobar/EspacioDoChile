@@ -20,7 +20,10 @@ public partial class TouristUbication : System.Web.UI.Page
                 var ubicacionDB = context.UBICACION.FirstOrDefault(data => data.ID == ubicacionId);
                 TitlePage.InnerText = ubicacionDB.NOMBRE.ToString();
                 LongDescription.InnerText = ubicacionDB.DESCRIPCION_LARGA;
-                MainImage.Src = ubicacionDB.IMAGENES.FirstOrDefault().RUTA;
+                if (ubicacionDB.IMAGENES.FirstOrDefault() != null)
+                {
+                    MainImage.Src = ubicacionDB.IMAGENES.FirstOrDefault().RUTA;
+                }
 
 
                 RepeaterActividades.DataSource = context.ACTIVIDADES.Where(act => act.ID_UBICACION == ubicacionId).ToList();

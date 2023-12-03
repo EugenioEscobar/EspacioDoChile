@@ -60,7 +60,7 @@ public partial class TouristRegistrarse : System.Web.UI.Page
                         IDENTIFICADOR = txtIdentificador.Text,
                         TELEFONO = txtTelefono.Text.Equals("") ? 0 : int.Parse(txtTelefono.Text),
                         DIRECCION = txtDireccion.Text,
-                        ID_TIPO_USUARIO = 1
+                        ID_TIPO_USUARIO = 1,
                     };
 
                     context.USUARIO.Add(nuevoUsuario);

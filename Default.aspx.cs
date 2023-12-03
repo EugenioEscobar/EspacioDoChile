@@ -34,7 +34,7 @@ public partial class _Default : System.Web.UI.Page
         else
         {
             MensajeLabel.Text = "Credenciales incorrectas. Inténtalo de nuevo.";
-            LinkPassword.Visible = true;
+            //LinkPassword.Visible = true;
         }
     }
 
