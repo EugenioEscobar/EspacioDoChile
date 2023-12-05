@@ -49,7 +49,7 @@ public partial class TouristCotizador : System.Web.UI.Page
         newReserva.COMENTARIO = txtSolicitudesEspeciales.Text;
         newReserva.FECHA_INICIO = DateTime.Parse(txtFechaLlegada.Text).AddHours(15);
         newReserva.FECHA_TERMINO = DateTime.Parse(txtFechaSalida.Text).AddHours(12);
-        newReserva.TOTAL = float.Parse(hdnTotalAPagar.Value);
+        newReserva.TOTAL = double.Parse(hdnTotalAPagar.Value);
 
         if (EstaDisponible(newReserva))
         {

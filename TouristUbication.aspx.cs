@@ -7,6 +7,10 @@ using System.Web.UI.WebControls;
 
 public partial class TouristUbication : System.Web.UI.Page
 {
+    // Propiedades para latitud y longitud
+    public string Latitud { get; set; }
+    public string Longitud { get; set; }
+    public string NombreZona { get; set; }
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -18,6 +22,12 @@ public partial class TouristUbication : System.Web.UI.Page
                 EspacioEntites context = new EspacioEntites();
 
                 var ubicacionDB = context.UBICACION.FirstOrDefault(data => data.ID == ubicacionId);
+
+                Latitud = ubicacionDB.LATITUD.Value.ToString().Replace(",",".");
+                Longitud = ubicacionDB.LONGITUD.Value.ToString().Replace(",", ".");
+                NombreZona = ubicacionDB.NOMBRE;
+                DataBind();
+
                 TitlePage.InnerText = ubicacionDB.NOMBRE.ToString();
                 LongDescription.InnerText = ubicacionDB.DESCRIPCION_LARGA;
                 if (ubicacionDB.IMAGENES.FirstOrDefault() != null)

@@ -10,7 +10,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DESCRIPCION_CORTA" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRIPCION_CORTA" Type="nvarchar" MaxLength="60" />
           <Property Name="DESCRIPCION_LARGA" Type="nvarchar" MaxLength="200" />
           <Property Name="ID_UBICACION" Type="int" />
         </EntityType>
@@ -109,11 +109,11 @@
           <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
           <Property Name="FECHA_INICIO" Type="date" />
           <Property Name="FECHA_TERMINO" Type="date" />
-          <Property Name="TOTAL" Type="float" />
           <Property Name="COMENTARIO" Type="nvarchar" MaxLength="100" />
           <Property Name="ID_ALOJAMIENTO" Type="int" />
           <Property Name="ID_USUARIO" Type="int" />
           <Property Name="CODIGO_RESERVA" Type="int" />
+          <Property Name="TOTAL" Type="float" />
         </EntityType>
         <EntityType Name="TIPO_USUARIO">
           <Key>
@@ -129,10 +129,12 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
-          <Property Name="DESCRIPCION_CORTA" Type="nvarchar" MaxLength="50" />
-          <Property Name="DESCRIPCION_LARGA" Type="nvarchar" MaxLength="500" />
+          <Property Name="DESCRIPCION_CORTA" Type="nvarchar(max)" />
+          <Property Name="DESCRIPCION_LARGA" Type="nvarchar(max)" />
           <Property Name="ID_COMUNA" Type="int" />
           <Property Name="ID_ZONA" Type="int" />
+          <Property Name="LATITUD" Type="float" />
+          <Property Name="LONGITUD" Type="float" />
         </EntityType>
         <EntityType Name="USUARIO">
           <Key>
@@ -580,8 +582,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPCION_CORTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DESCRIPCION_LARGA" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION_CORTA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION_LARGA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ID_COMUNA" Type="Int32" />
           <Property Name="ID_ZONA" Type="Int32" />
           <NavigationProperty Name="COMUNA" Relationship="Self.FK__UBICACION__ID_CO__403A8C7D" FromRole="UBICACION" ToRole="COMUNA" />
@@ -589,6 +591,8 @@
           <NavigationProperty Name="IMAGENES" Relationship="ct_espacio_prodModel.IMAGENES_DE_UBICACIONES" FromRole="UBICACION" ToRole="IMAGENES" />
           <NavigationProperty Name="ACTIVIDADES" Relationship="ct_espacio_prodModel.FK__ACTIVIDAD__ID_UB__656C112C" FromRole="UBICACION" ToRole="ACTIVIDADES" />
           <NavigationProperty Name="RESEÑA_UBICACION" Relationship="ct_espacio_prodModel.FK__RESEÑA_UB__ID_UB__59063A471" FromRole="UBICACION" ToRole="RESEÑA_UBICACION" />
+          <Property Name="LATITUD" Type="Double" />
+          <Property Name="LONGITUD" Type="Double" />
         </EntityType>
         <EntityType Name="USUARIO">
           <Key>
@@ -845,7 +849,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DESCRIPCION_CORTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION_CORTA" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="DESCRIPCION_LARGA" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ID_UBICACION" Type="Int32" />
           <NavigationProperty Name="UBICACION" Relationship="ct_espacio_prodModel.FK__ACTIVIDAD__ID_UB__656C112C" FromRole="ACTIVIDADES" ToRole="UBICACION" />
@@ -1019,6 +1023,8 @@
           <EntitySetMapping Name="UBICACION">
             <EntityTypeMapping TypeName="ct_espacio_prodModel.UBICACION">
               <MappingFragment StoreEntitySet="UBICACION">
+                <ScalarProperty Name="LONGITUD" ColumnName="LONGITUD" />
+                <ScalarProperty Name="LATITUD" ColumnName="LATITUD" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="DESCRIPCION_CORTA" ColumnName="DESCRIPCION_CORTA" />

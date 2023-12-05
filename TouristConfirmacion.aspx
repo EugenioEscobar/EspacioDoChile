@@ -23,7 +23,7 @@
                                 </ul>
                             </div>
                             <div class="card-footer text-muted">
-                                Paga directamente con paypal
+                                <a href="TouristPagoExitoso.aspx" style="text-decoration: none; color: rgba(33, 37, 41, 0.75);">Paga directamente con paypal</a>
                             </div>
                         </div>
                     </div>

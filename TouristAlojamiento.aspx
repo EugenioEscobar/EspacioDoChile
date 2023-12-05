@@ -76,65 +76,56 @@
             </div>
             <div class="col"></div>
         </div>
-        <div class="row mt-5">
+
+        <!-- Pestaña de Reseñas -->
+        <div class="row mt-3" id="reseñas">
             <h4>Reseñas de los Visitantes</h4>
-            <!-- Paginación -->
-            <div class="mt-4">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <!-- Reseñas -->
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <img src="imagen_usuario_1.jpg" alt="Usuario 1" class="rounded-circle mr-3" width="50"
-                            height="50">
-                        <div>
-                            <h5 class="mb-0">Usuario 1</h5>
-                            <p class="text-muted">Puntuación: 4.5/5 - 15 de octubre de 2023</p>
+
+            <!-- Repeater para mostrar reseñas -->
+            <asp:Repeater ID="RepeaterResenas" runat="server">
+                <ItemTemplate>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <img src='<%# Eval("RUTA_IMAGEN") %>' alt='<%# Eval("NOMBRE") %>' class="rounded-circle mr-3" width="50" height="50" />
+                                <div>
+                                    <h5 class="mb-0"><%# Eval("NOMBRE") %></h5>
+                                    <p class="text-muted">Puntuación:<%# Eval("PUNTUACION")%>-5 Fecha: <%#    Eval("FECHA") %></p>
+                                </div>
+                            </div>
+                            <p class="mt-3"><%# Eval("DESCRIPCION") %></p>
                         </div>
                     </div>
-                    <p class="mt-3">
-                        ¡Increíble experiencia en las Cavernas de Mármol! Definitivamente lo
-                        recomendaría a otros
-                        viajeros.
-                    </p>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <img src="imagen_usuario_2.jpg" alt="Usuario 2" class="rounded-circle mr-3" width="50"
-                            height="50">
-                        <div>
-                            <h5 class="mb-0">Usuario 2</h5>
-                            <p class="text-muted">Puntuación: 5/5 - 14 de octubre de 2023</p>
-                        </div>
-                    </div>
-                    <p class="mt-3">
-                        ¡La belleza natural de las Cavernas de Mármol es impresionante! Una
-                        visita obligada.
-                    </p>
-                </div>
-            </div>
+                </ItemTemplate>
+            </asp:Repeater>
+
             <!-- Área de texto para agregar una nueva reseña -->
             <div class="card mt-3">
                 <div class="card-body">
-                    <h5 class="card-title">Agregar Nueva Reseña</h5>
                     <div class="form-group">
-                        <textarea class="form-control" rows="3" placeholder="Escribe tu reseña aquí..."></textarea>
+                        <div class="">
+                            <h5 class="card-title">Agregar Nueva Reseña</h5>
+                        </div>
+                        <label for="ddlPuntuacion">Puntuación:</label>
+                        <asp:DropDownList ID="ddlPuntuacion" runat="server" CssClass="form-control">
+                            <asp:ListItem Text="1" Value="1" />
+                            <asp:ListItem Text="2" Value="2" />
+                            <asp:ListItem Text="3" Value="3" />
+                            <asp:ListItem Text="4" Value="4" />
+                            <asp:ListItem Text="5" Value="5" />
+                        </asp:DropDownList>
                     </div>
-                    <div class="text-right">
-                        <button class="btn btn-primary">Agregar Reseña</button>
+                    <div class="form-group mt-2">
+                        <asp:TextBox ID="txtResena" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3" placeholder="Escribe tu reseña aquí..."></asp:TextBox>
+                    </div>
+                    <div class="text-right mt-2">
+                        <asp:Button class="btn btn-primary" ID="btnAddResena" runat="server" OnClick="btnAddResena_Click" Text="Agregar Reseña" />
                     </div>
                 </div>
             </div>
         </div>
+
+
     </div>
 
 </asp:Content>

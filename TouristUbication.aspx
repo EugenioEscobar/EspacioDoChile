@@ -2,6 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
 
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaE5vo25XRgd_JLNsLfDPYzbjnfOvHLjM&callback=console.debug&libraries=maps,marker&v=beta">
+    </script>
     <div class="container-fluid p-0">
         <!-- Sección de Banner Principal -->
         <div class="row no-gutters">
@@ -173,9 +176,12 @@
                     <!-- Pestaña de Mapa -->
                     <div class="tab-pane fade" id="mapa">
                         <h4>Mapa del Lugar Turístico</h4>
-                        <iframe width="100%" height="450" style="border: 0;" allowfullscreen="" loading="lazy"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d43860.93638642587!2d-72.66498134085845!3d-46.600905493845474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xbd92f86a680a993b%3A0x8bd2ffe240014114!2sCavernas%20de%20Marmol!5e0!3m2!1sen!2sus!4v1697343905934!5m2!1sen!2sus"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div class="div" style="height: 400px;">
+                            <gmp-map center='<%# Latitud + "," + Longitud %>' zoom="14" map-id="DEMO_MAP_ID" style="height: 100%;">
+                                <gmp-advanced-marker position='<%# Latitud + "," + Longitud %>' title='<%# NombreZona %>'>
+                                </gmp-advanced-marker>
+                            </gmp-map>
+                        </div>
                     </div>
                 </div>
             </div>

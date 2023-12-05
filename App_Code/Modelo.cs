@@ -191,6 +191,8 @@ public partial class UBICACION
     public string DESCRIPCION_LARGA { get; set; }
     public Nullable<int> ID_COMUNA { get; set; }
     public Nullable<int> ID_ZONA { get; set; }
+    public Nullable<double> LATITUD { get; set; }
+    public Nullable<double> LONGITUD { get; set; }
 
     public virtual COMUNA COMUNA { get; set; }
     public virtual ZONA_GEOGRAFICA ZONA_GEOGRAFICA { get; set; }
